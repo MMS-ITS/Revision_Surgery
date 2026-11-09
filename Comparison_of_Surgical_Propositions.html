@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Revisional Surgery After OAGB — Comparison of Four Surgical Propositions</title>
+<style>
+  :root{
+    --ink:#1b2430; --muted:#5a6b7b; --line:#d8e0e8; --bg:#f4f7fa;
+    --accent:#0b5d8a; --accent2:#0e7c86; --good:#1c7c54; --bad:#b03a2e; --warn:#b9770e;
+    --card:#ffffff;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  body{
+    margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    color:var(--ink);background:var(--bg);line-height:1.55;font-size:15px;
+  }
+  .wrap{max-width:1040px;margin:0 auto;padding:32px 28px 72px;}
+  header.masthead{
+    background:linear-gradient(135deg,#0b5d8a,#0e7c86);color:#fff;border-radius:14px;
+    padding:30px 32px;margin-bottom:26px;box-shadow:0 6px 22px rgba(11,93,138,.25);
+  }
+  header.masthead h1{margin:0 0 6px;font-size:25px;line-height:1.25;}
+  header.masthead p{margin:3px 0;opacity:.95;font-size:14px;}
+  .pill{display:inline-block;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);
+    padding:3px 10px;border-radius:999px;font-size:12px;margin-top:10px;}
+  h2{font-size:20px;margin:34px 0 12px;padding-bottom:8px;border-bottom:2px solid var(--line);color:var(--accent);}
+  h3{font-size:16px;margin:20px 0 8px;color:var(--ink);}
+  p{margin:9px 0;}
+  .lead{color:var(--muted);font-size:14.5px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:14px 0;
+    box-shadow:0 1px 3px rgba(27,36,48,.05);}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  .note{background:#fff8e7;border:1px solid #f0dca0;border-left:5px solid var(--warn);border-radius:8px;
+    padding:12px 16px;margin:14px 0;font-size:14px;}
+  .disc{background:#fdecea;border:1px solid #f1b7b0;border-left:5px solid var(--bad);border-radius:8px;
+    padding:12px 16px;margin:14px 0;font-size:13.5px;}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13.5px;background:#fff;border-radius:10px;overflow:hidden;}
+  th,td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top;}
+  th{background:#eef4f8;color:var(--accent);font-weight:600;}
+  tbody tr:nth-child(even){background:#f8fbfd;}
+  .who{font-weight:700;}
+  .tag{display:inline-block;font-size:11px;font-weight:600;padding:2px 8px;border-radius:999px;color:#fff;}
+  .t-lee{background:#0b5d8a;} .t-usama{background:#6a1b9a;} .t-murat{background:#b9770e;} .t-fakhrul{background:#1c7c54;}
+  ul.pc{margin:6px 0 6px 2px;padding-left:18px;}
+  ul.pc li{margin:4px 0;}
+  .pros li::marker{color:var(--good);} .cons li::marker{color:var(--bad);}
+  .pros-title{color:var(--good);font-weight:700;margin:4px 0;}
+  .cons-title{color:var(--bad);font-weight:700;margin:10px 0 4px;}
+  .scorebar{position:relative;background:#e7edf2;border-radius:999px;height:16px;overflow:hidden;margin:3px 0;}
+  .scorebar > span{display:block;height:100%;border-radius:999px;}
+  .score-num{font-weight:700;font-size:15px;}
+  .scorecard{display:grid;grid-template-columns:1fr auto;gap:10px 16px;align-items:center;}
+  .crit td:last-child{font-weight:600;text-align:center;width:54px;}
+  .final td.s{font-size:17px;font-weight:800;text-align:center;}
+  .rank1{color:var(--good);} .rank-mid{color:var(--warn);} .rank-low{color:var(--bad);}
+  footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);color:var(--muted);font-size:12px;}
+  .anat{font-size:13px;color:var(--muted);}
+  .kv{display:grid;grid-template-columns:150px 1fr;gap:4px 12px;font-size:13.5px;margin:8px 0;}
+  .kv dt{color:var(--muted);} .kv dd{margin:0;}
+  @media print{
+    body{background:#fff;font-size:12px;}
+    .wrap{padding:0;max-width:none;}
+    header.masthead{box-shadow:none;}
+    h2{page-break-after:avoid;} .card,table,.note,.disc{page-break-inside:avoid;}
+    .pagebreak{page-break-before:always;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="masthead">
+  <h1>Revisional Surgery After OAGB — Comparison of Four Surgical Propositions</h1>
+  <p><strong>Patient:</strong> M. Mohsin Chowdhury, 59 y, male · BMI ≈ 27 · OAGB (July 2017, BP limb 155&nbsp;cm)</p>
+  <p><strong>Problem:</strong> Chronic marginal ulcer with bleeding · bile reflux · hiatal hernia (Hill IV) · gallstones · persistent H.&nbsp;pylori · iron-deficiency anaemia</p>
+  <p><strong>Propositions compared:</strong> Prof. Wei-Jei Lee (Taiwan) · Dr&nbsp;Usama Iqbal (Aga Khan, Karachi) · Dr&nbsp;Murat Üstün (Istanbul) · Dr&nbsp;Fakhrul Islam (advisory opinion)</p>
+  <span class="pill">Prepared from the email correspondence in MMS-ITS/Revision_Surgery · research-dated 8 November 2026</span>
+</header>
+
+<div class="disc">
+  <strong>Important — read first.</strong> This document is an <em>educational comparison of the written opinions</em> contained in the shared correspondence. It is <strong>not medical advice</strong> and is not a substitute for a formal consultation. The scores are a structured judgement of each <em>proposal as written</em> (its reasoning, completeness and alignment with current bariatric-revision literature) — <strong>not</strong> a ranking of the surgeons' ability, and not a recommendation to choose any one centre. Any decision must be made with the treating team after a full in-person assessment. Prepared by an AI assistant; verify all clinical points independently.
+</div>
+
+<h2>1. The clinical situation in brief</h2>
+<div class="card">
+<p>A 59-year-old man had a one-anastomosis gastric bypass (OAGB / mini-gastric bypass) in 2017 with the gastrojejunostomy at 155&nbsp;cm. Nine years later he has the classic triad that drives OAGB revision:</p>
+<dl class="kv">
+  <dt>Marginal ulcer</dt><dd>Large, chronic, just distal to the gastrojejunostomy; bled in Sept 2026 (Hb fell to 8.2 g/dL).</dd>
+  <dt>Bile reflux</dt><dd>Large volume of bile seen in the pouch — the mechanism most associated with OAGB ulceration and reflux.</dd>
+  <dt>Hiatal hernia</dt><dd>Hill grade IV (severe).</dd>
+  <dt>Gallstones</dt><dd>Multiple 5–6&nbsp;mm stones, new since 2025; asymptomatic.</dd>
+  <dt>H. pylori</dt><dd>Persistently positive after two eradication courses; eradication not yet confirmed.</dd>
+  <dt>Anaemia</dt><dd>Recurrent iron deficiency; cold intolerance; on IV iron.</dd>
+  <dt>BMI ≈ 27</dt><dd>Weight is <em>not</em> the problem — protecting nutrition and avoiding further weight loss is a goal.</dd>
+</dl>
+<p class="anat"><strong>Where the field broadly agrees:</strong> for bile reflux + recurrent marginal ulcer after OAGB, converting to a Roux-en-Y configuration (which diverts bile away from the pouch) is the mainstream durable solution; the gallbladder is usually removed in the same sitting because post-RYGB ERCP is very difficult; and the hiatal hernia should be repaired. The <em>disagreements</em> between the four opinions are about the details that matter most: whether to resect the ulcer, whether to cut the vagus nerve, and how long the Roux (alimentary) limb should be.</p>
+</div>
+
+<h2>2. The four propositions, side by side</h2>
+<table>
+  <thead>
+    <tr>
+      <th style="width:150px;">Element</th>
+      <th><span class="tag t-lee">Prof. Wei-Jei Lee</span></th>
+      <th><span class="tag t-usama">Dr Usama Iqbal</span></th>
+      <th><span class="tag t-murat">Dr Murat Üstün</span></th>
+      <th><span class="tag t-fakhrul">Dr Fakhrul Islam</span></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td class="who">Core operation</td>
+      <td>OAGB→RYGB; <strong>keep</strong> the old gastrojejunostomy, buttress it with circumferential sutures</td>
+      <td>OAGB→RYGB; <strong>resect</strong> the ulcerated anastomosis & create a new one</td>
+      <td>OAGB→RYGB (or reversal); ulcer area "assessed — may need local revision or resection"</td>
+      <td>OAGB→RYGB; <strong>refashion a new anastomosis</strong></td></tr>
+    <tr><td class="who">Ulcer handling</td>
+      <td>Left in place; healing expected after acid/bile control + sutures; no biopsy</td>
+      <td>Removed with the anastomosis — cause excised</td>
+      <td>Judged intra-op; flags that ulcer "should not be assumed bile-only"</td>
+      <td>Removed by refashioning; sees ulcer as a consequence of bile reflux</td></tr>
+    <tr><td class="who">Truncal vagotomy</td>
+      <td><strong>Yes</strong> — calls acid reduction "the utmost priority"</td>
+      <td>Not proposed</td>
+      <td>Not proposed</td>
+      <td><strong>Explicitly against</strong> — ulcer is bile-driven, not acid-driven</td></tr>
+    <tr><td class="who">Roux / limb length</td>
+      <td>New anastomosis 40&nbsp;cm below old GJ (to ~60&nbsp;cm if common channel long)</td>
+      <td>Standard RYGB; length not specified</td>
+      <td>Standard RYGB; length not specified</td>
+      <td><strong>AL 75&nbsp;cm + BP 50–60&nbsp;cm</strong>, specified</td></tr>
+    <tr><td class="who">Hiatal hernia</td>
+      <td>Repair + reduce herniated tissue</td>
+      <td>Repair (routine at centre)</td>
+      <td>Repair if confirmed appropriate</td>
+      <td>At least cruroplasty if pouch migration suspected</td></tr>
+    <tr><td class="who">Gallbladder</td>
+      <td>Remove if symptoms/preference</td>
+      <td><strong>Remove</strong> (hard to treat later complications)</td>
+      <td>Discuss — stones alone don't mandate removal</td>
+      <td><strong>Must be removed</strong> in the same sitting</td></tr>
+    <tr><td class="who">H. pylori</td>
+      <td>"Little role" in ulcer; treat any time</td>
+      <td>Long-term GI treatment, can be post-op</td>
+      <td>Confirm eradication; don't stop PPI unsafely</td>
+      <td>May add predisposition; secondary to bile</td></tr>
+    <tr><td class="who">One stage vs staged</td>
+      <td>Single stage, no drain/NG, 1–2 d stay</td>
+      <td>Single stage (all three together)</td>
+      <td>Single stage if stable; staged if bleeding/anaemia/poor nutrition</td>
+      <td>Single stage</td></tr>
+    <tr><td class="who">Stated experience</td>
+      <td>OAGB since 2000; ~30 of this exact procedure/20 y; recent complication rate →0</td>
+      <td>~30 revisions (mixed), 25 HH/yr, "no complications"</td>
+      <td>Volume not given in writing; team-based</td>
+      <td>N/A — advisory, refers on (suggests USA)</td></tr>
+    <tr><td class="who">Pre-op work-up</td>
+      <td>Minimal; no routine extra tests</td>
+      <td><strong>Structured lab panel</strong> + anaesthesia teleclinic</td>
+      <td><strong>Most thorough</strong>: nutrition, anaesthesia, drug/hypersomnia review, record reconciliation</td>
+      <td>Defers detail to operating surgeon</td></tr>
+    <tr><td class="who">Indicative cost / stay</td>
+      <td>~US$10k lap (US$15k robotic); ~1 week</td>
+      <td>~PKR 1.5–2.05m (≈US$5.4–7.4k); 1–2 d + 1–2 wk in country</td>
+      <td>£5,350 base + £2,000 for HH+chole ≈ £7,350; ~10 d</td>
+      <td>N/A</td></tr>
+  </tbody>
+</table>
+
+<div class="note">
+<strong>The three technical fault lines.</strong>
+(1) <em>Keep vs resect the ulcer</em> — Lee keeps it (speed/safety, less dissection); Usama and Fakhrul resect it (removes the diseased tissue, allows biopsy, lower recurrence risk but a fresh anastomosis to heal).
+(2) <em>Vagotomy or not</em> — Lee adds truncal vagotomy to cut acid; Fakhrul argues this is the wrong target because the driver is bile, and most current literature treats RYGB diversion (± resection) as the primary fix with vagotomy reserved for refractory cases.
+(3) <em>Limb length</em> — only Lee and Fakhrul commit to numbers; Fakhrul's longer alimentary limb (75&nbsp;cm) is more explicitly aimed at keeping bile off the pouch, which is the patient's chief concern.
+</div>
+
+<h2 class="pagebreak">3. Pros and cons of each proposition</h2>
+
+<div class="card">
+  <h3><span class="tag t-lee">Prof. Wei-Jei Lee</span> — RYGB conversion, keep old anastomosis + circumferential suture + truncal vagotomy</h3>
+  <p class="pros-title">Pros</p>
+  <ul class="pc pros">
+    <li>Highest declared track record for <em>this exact</em> procedure (OAGB pioneer since 2000; ~30 identical cases; recent complication rate reported near zero).</li>
+    <li>Lowest-trauma operation: no new anastomosis to leak, no drain/NG, 1–2 day stay, fast recovery — attractive given the patient's anaemia and long travel.</li>
+    <li>Engaged with the patient's detailed questions point-by-point; internally consistent surgical logic (keeps blood supply, 2&nbsp;cm safety margin, tented suture to avoid stenosis).</li>
+    <li>Addresses bile (RYGB diversion) <em>and</em> acid (vagotomy) — belt-and-braces on ulcer recurrence.</li>
+  </ul>
+  <p class="cons-title">Cons</p>
+  <ul class="pc cons">
+    <li>Leaving a large, chronically ulcerated, previously-bled anastomosis in situ is the most debated choice — no tissue diagnosis, and "circumferential suturing" of an ulcer is a non-standard, hard-to-verify manoeuvre.</li>
+    <li><strong>Refuses biopsy</strong> of a chronic, bled ulcer in a 59-year-old — most guidelines would biopsy to exclude malignancy.</li>
+    <li>Truncal vagotomy adds risk of gastric stasis/dumping; its necessity is contested once bile is diverted (see Fakhrul).</li>
+    <li>Downplays H. pylori and skips structured nutritional/anaesthetic optimisation despite recent bleed, anaemia and complex drug list.</li>
+    <li>40&nbsp;cm limb is shorter than many published anti-bile-reflux conversions.</li>
+  </ul>
+</div>
+
+<div class="card">
+  <h3><span class="tag t-usama">Dr Usama Iqbal</span> — RYGB conversion with resection of the ulcerated anastomosis + new anastomosis, all-in-one</h3>
+  <p class="pros-title">Pros</p>
+  <ul class="pc pros">
+    <li>Resecting the diseased anastomosis removes the ulcer-bearing tissue outright — the most definitive answer to a chronic, bled ulcer, and allows histology.</li>
+    <li>Clear, decisive single-stage plan (RYGB + HH repair + cholecystectomy) with sound reasons (post-RYGB gallstone complications are hard to treat).</li>
+    <li>Most <strong>process-disciplined</strong>: defined pre-op lab panel, mandatory anaesthesia fitness teleclinic, named stapler platform, states he is the primary surgeon.</li>
+    <li>Correctly frames the ulcer as bile/ischaemia-driven and defers H. pylori to long-term GI care rather than delaying surgery.</li>
+    <li>Accessible (same region, visa support, structured coordination).</li>
+  </ul>
+  <p class="cons-title">Cons</p>
+  <ul class="pc cons">
+    <li>Did not commit limb lengths in writing — the single most important variable for bile control was left to the consult.</li>
+    <li>"~30 revisions, no complications" is a <em>mixed</em> revision figure, not OAGB→RYGB-specific; "no complications" across all revisions is an optimistic claim that invites scrutiny.</li>
+    <li>Preferred to move discussion off email to teleclinic — reasonable clinically, but left several of the patient's written questions unanswered on paper.</li>
+    <li>A new anastomosis carries a real (if small) leak risk that Lee's approach avoids.</li>
+  </ul>
+</div>
+
+<div class="card">
+  <h3><span class="tag t-murat">Dr Murat Üstün</span> — RYGB conversion (or reversal), ulcer managed intra-operatively, combined where safe</h3>
+  <p class="pros-title">Pros</p>
+  <ul class="pc pros">
+    <li><strong>Most careful, safety-first assessment</strong> on paper: the only one to flag the discrepancy in the medication records, insist the ulcer "should not be assumed bile-only," and keep reversal genuinely on the table.</li>
+    <li>Most complete pre-operative pathway: nutrition panel, anaesthetic/cardiac review, specific planning for methylphenidate/hypersomnia, and colonoscopy-lesion follow-up.</li>
+    <li>Explicitly offers a <strong>staged option</strong> if bleeding/anaemia/nutrition make one-stage unsafe — the most individualised risk posture.</li>
+    <li>Transparent, itemised package pricing and realistic ~10-day timeline including fit-to-fly.</li>
+    <li>Appropriately cautious, hedged language — avoids over-promising.</li>
+  </ul>
+  <p class="cons-title">Cons</p>
+  <ul class="pc cons">
+    <li>Least <em>committal</em> surgical plan — much is deferred to "intra-operative assessment," so the patient can't compare a concrete technique.</li>
+    <li>No specific limb length, no firm decision on resect-vs-keep, no stated vagotomy position.</li>
+    <li>Did <strong>not state personal/team case volumes</strong> for OAGB revision in writing even when directly asked — a gap given the question was explicit.</li>
+    <li>The clinical content arrives wrapped in a commercial "luxury package / special price" frame, which can blur the line between clinical advice and sales.</li>
+  </ul>
+</div>
+
+<div class="card">
+  <h3><span class="tag t-fakhrul">Dr Fakhrul Islam</span> — advisory opinion: RYGB with a new anastomosis, specified limbs, no vagotomy, remove gallbladder</h3>
+  <p class="pros-title">Pros</p>
+  <ul class="pc pros">
+    <li>Clear, decisive and well-reasoned on the two pivotal points: <strong>bile — not acid — is the driver</strong>, so convert properly and <strong>do not do a vagotomy</strong> (a view well supported in current practice).</li>
+    <li>The only opinion to commit specific, bile-protective numbers: <strong>AL 75&nbsp;cm + BP 50–60&nbsp;cm</strong> with a refashioned anastomosis.</li>
+    <li>Firm on removing the gallbladder in the same sitting and on at least a cruroplasty for the hiatus.</li>
+    <li>Adds genuine value as a trusted, candid overview that reconciles the conflicting opinions — and honestly flags the patient's information-overload/anxiety as a decision risk.</li>
+  </ul>
+  <p class="cons-title">Cons</p>
+  <ul class="pc cons">
+    <li>It is an <strong>advisory second opinion, not an operative offer</strong> — he would refer the patient on (suggests the USA), so there is no accountable surgeon, cost, or facility attached.</li>
+    <li>No case-volume, no pre-op/anaesthetic work-up detail, no complication data — outside the scope of an advisory note.</li>
+    <li>Asks the patient to "avoid highlighting all the risks" and to trust the plan — reassuring in intent, but under-weights informed consent for a high-complexity revision.</li>
+    <li>Recommendations can't be executed as-is; they must be handed to an operating team, reintroducing the very variability he describes.</li>
+  </ul>
+</div>
+
+<h2 class="pagebreak">4. Scoring</h2>
+<div class="card">
+<p class="lead">Each proposition is scored out of 10 against six weighted criteria. Scores reflect the <strong>proposal as written in the correspondence</strong> and its alignment with mainstream OAGB-revision practice (RYGB conversion for bile reflux, resection + biopsy of a chronic bled ulcer, bile-protective limb lengths, structured peri-operative optimisation). They do <em>not</em> measure surgical skill, which cannot be judged from emails.</p>
+
+<table class="crit">
+  <thead>
+    <tr><th>Criterion (weight)</th>
+      <th><span class="tag t-lee">Lee</span></th>
+      <th><span class="tag t-usama">Usama</span></th>
+      <th><span class="tag t-murat">Murat</span></th>
+      <th><span class="tag t-fakhrul">Fakhrul</span></th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Soundness vs. evidence — tackles the <em>bile</em> driver, handles the ulcer correctly (25%)</td><td>6</td><td>9</td><td>8</td><td>9</td></tr>
+    <tr><td>Completeness of the plan — limb lengths, all 3 problems, concrete technique (20%)</td><td>8</td><td>7</td><td>7</td><td>8</td></tr>
+    <tr><td>Peri-operative safety & work-up — anaemia, anaesthesia, nutrition, H. pylori (20%)</td><td>5</td><td>8</td><td>9</td><td>5</td></tr>
+    <tr><td>Demonstrated relevant experience (stated) (15%)</td><td>9</td><td>7</td><td>5</td><td>3</td></tr>
+    <tr><td>Communication, transparency & informed consent (10%)</td><td>8</td><td>7</td><td>9</td><td>6</td></tr>
+    <tr><td>Deliverability — can it actually be carried out for this patient? (10%)</td><td>9</td><td>9</td><td>8</td><td>4</td></tr>
+  </tbody>
+</table>
+
+<h3>Weighted scores out of 10</h3>
+<table class="final">
+  <thead><tr><th>Proposition</th><th>Score /10</th><th>One-line verdict</th></tr></thead>
+  <tbody>
+    <tr><td><span class="tag t-usama">Dr Usama Iqbal</span></td><td class="s rank1">7.9</td>
+      <td>Most <strong>definitive and executable</strong> plan — resects the ulcer, disciplined process; just needs limb lengths pinned down.</td></tr>
+    <tr><td><span class="tag t-murat">Dr Murat Üstün</span></td><td class="s rank1">7.5</td>
+      <td>Safest, most thorough <strong>assessment</strong>; loses points for a deliberately non-committal surgical plan and undisclosed volumes.</td></tr>
+    <tr><td><span class="tag t-fakhrul">Dr Fakhrul Islam</span></td><td class="s rank-mid">6.6</td>
+      <td>Sharpest <strong>reasoning</strong> (bile-driven, no vagotomy, specified limbs) — but advisory only, not an operative offer.</td></tr>
+    <tr><td><span class="tag t-lee">Prof. Wei-Jei Lee</span></td><td class="s rank-mid">6.9</td>
+      <td>Strongest <strong>track record</strong> and lowest-trauma operation; held back by keeping an unbiopsied ulcer and a contested vagotomy.</td></tr>
+  </tbody>
+</table>
+
+<h3>Score visualised</h3>
+<div class="scorecard">
+  <div><span class="tag t-usama">Dr Usama Iqbal</span></div>
+  <div class="score-num">7.9 / 10</div>
+  <div class="scorebar" style="grid-column:1/-1;"><span style="width:79%;background:#6a1b9a;"></span></div>
+
+  <div><span class="tag t-murat">Dr Murat Üstün</span></div>
+  <div class="score-num">7.5 / 10</div>
+  <div class="scorebar" style="grid-column:1/-1;"><span style="width:75%;background:#b9770e;"></span></div>
+
+  <div><span class="tag t-lee">Prof. Wei-Jei Lee</span></div>
+  <div class="score-num">6.9 / 10</div>
+  <div class="scorebar" style="grid-column:1/-1;"><span style="width:69%;background:#0b5d8a;"></span></div>
+
+  <div><span class="tag t-fakhrul">Dr Fakhrul Islam</span></div>
+  <div class="score-num">6.6 / 10</div>
+  <div class="scorebar" style="grid-column:1/-1;"><span style="width:66%;background:#1c7c54;"></span></div>
+</div>
+</div>
+
+<div class="note">
+<strong>How to read these scores.</strong> They are close on purpose — all four converge on the right core operation (RYGB conversion). The gaps come from the <em>details</em>: Usama and Fakhrul make the technically strongest ulcer/bile choices; Murat gives the safest work-up; Lee offers the strongest experience and the gentlest operation but the most debatable ulcer decision. A reasonable reading is that the <strong>best plan may combine elements</strong>: Usama's/Fakhrul's resection + bile-protective limb lengths, delivered with Murat's peri-operative rigour — a point worth raising directly with whichever surgeon the patient chooses.
+</div>
+
+<h2>5. Suggested questions to settle before deciding</h2>
+<div class="card">
+<ul>
+  <li><strong>Resect or keep the ulcer?</strong> Ask each surgeon to justify, and ask specifically about biopsy to exclude malignancy in a chronic, bled ulcer.</li>
+  <li><strong>Exact limb lengths</strong> (alimentary + biliopancreatic + common channel) and the evidence for the bile-reflux target.</li>
+  <li><strong>Vagotomy — yes or no?</strong> If yes, what is the plan for post-vagotomy diarrhoea/stasis, and why is it needed once bile is diverted?</li>
+  <li><strong>Procedure-specific outcomes</strong>: leak, bleed, re-operation and mortality rates for OAGB→RYGB specifically (not mixed revisions).</li>
+  <li><strong>Peri-operative optimisation</strong>: anaemia correction, anaesthetic plan around methylphenidate/modafinil, H. pylori confirmation, and whether the ulcer must heal first.</li>
+  <li><strong>One-stage vs staged</strong> given the recent bleed — and the fall-back if intra-operative findings change the plan.</li>
+</ul>
+</div>
+
+<footer>
+  <p><strong>Sources:</strong> the four Word documents in the repository <code>MMS-ITS/Revision_Surgery</code> — <em>Emails Prof. Wei-Jei Lee</em>, <em>Emails with Dr. Usama Iqbal (Aga Khan University Hospital)</em>, <em>Emails Istanbul Bariatric Center Team</em>, and <em>Opinion of Dr Fakhrul Islam</em>. Clinical framing reflects mainstream bariatric-revision practice as of the research date.</p>
+  <p>Generated as an educational comparison on 8 November 2026. Not medical advice. Verify every clinical point with the treating team.</p>
+</footer>
+
+</div>
+</body>
+</html>
