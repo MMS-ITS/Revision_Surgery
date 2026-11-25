@@ -1,0 +1,634 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OAGB Revision Re-scored</title>
+<style>
+  @page { size: A4; margin: 14mm 13mm 16mm 13mm; }
+  :root {
+    --ink: #191919; --ink-2: #555b66; --ink-3: #7a808a;
+    --hair: #e3e6ea; --plane: #f5f7fa; --surface: #ffffff;
+    --navy: #0e3d7e; --navy-2: #1757ac; --teal: #00866c;
+    --lee: #257de0; --usama: #f47230; --ustun: #00b894; --fakhrul: #f2a600;
+    --lee-t: #e6f0fc; --usama-t: #fdeee6; --ustun-t: #e0f6f1; --fakhrul-t: #fdf3dc;
+    --good: #0a7d1e; --warn: #b36b00; --bad: #c62f30;
+  }
+  * { box-sizing: border-box; }
+  html, body { background: var(--surface); }
+  body { margin: 0; font-family: Inter, "Liberation Sans", system-ui, sans-serif; color: var(--ink);
+         font-size: 8.9pt; line-height: 1.38; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  h1, h2, h3, h4 { margin: 0; font-weight: 700; letter-spacing: -0.01em; }
+  p { margin: 0 0 6px 0; }
+  .page-break { break-before: page; }
+  .avoid { break-inside: avoid; }
+  .tnum { font-variant-numeric: tabular-nums; }
+
+  /* Banner */
+  .banner { border-radius: 14px; padding: 16px 20px 14px; color: #fff;
+            background: linear-gradient(120deg, #0e3d7e 0%, #1b64be 45%, #00866c 100%); position: relative; overflow: hidden; }
+  .banner .kicker { font-size: 8pt; letter-spacing: 0.16em; text-transform: uppercase; opacity: 0.85; font-weight: 600; }
+  .banner h1 { font-size: 19pt; line-height: 1.12; margin: 6px 0 6px; }
+  .banner .sub { font-size: 10.5pt; opacity: 0.95; }
+  .banner .meta { margin-top: 10px; font-size: 8.4pt; opacity: 0.85; }
+  .banner .stripe { position: absolute; right: -30px; top: -30px; width: 190px; height: 190px; border-radius: 50%;
+                    background: radial-gradient(circle, rgba(255,255,255,0.18), rgba(255,255,255,0) 70%); }
+  .dots { display: flex; gap: 6px; margin-top: 10px; }
+  .dots span { width: 26px; height: 6px; border-radius: 3px; display: inline-block; }
+
+  /* Section heads */
+  .sec { display: flex; align-items: baseline; gap: 10px; margin: 12px 0 7px; }
+  .sec .num { flex: none; width: 24px; height: 24px; border-radius: 7px; background: var(--navy); color: #fff;
+              font-weight: 700; font-size: 10pt; display: inline-flex; align-items: center; justify-content: center; transform: translateY(4px); }
+  .sec h2 { font-size: 14pt; color: var(--navy); }
+  .sec .lede { color: var(--ink-2); font-size: 9pt; }
+  .lede-block { color: var(--ink-2); margin: -2px 0 8px 34px; font-size: 9.2pt; }
+
+  /* Grids and cards */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .grid-cover { display: grid; grid-template-columns: 1.1fr 1fr; gap: 12px; margin-top: 10px; }
+  .grid4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  .card { border: 1px solid var(--hair); border-radius: 11px; padding: 11px 12px; background: #fff; }
+  .card.plane { background: var(--plane); border-color: transparent; }
+  .card h3 { font-size: 10.6pt; margin-bottom: 5px; }
+  .answer { border-left: 5px solid var(--navy); background: linear-gradient(90deg, #eef4fd, #ffffff); border-radius: 10px; padding: 9px 12px; }
+  .answer p { font-size: 8.8pt; line-height: 1.36; }
+  .answer strong { color: var(--navy); }
+
+  .tile { border-radius: 11px; padding: 10px 11px 10px; border: 1px solid var(--hair); position: relative; background: #fff; }
+  .tile .bar { position: absolute; left: 0; top: 0; right: 0; height: 6px; border-radius: 11px 11px 0 0; }
+  .tile .rank { font-size: 7.6pt; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); font-weight: 700; margin-top: 3px; }
+  .tile .name { font-weight: 700; font-size: 10.2pt; margin-top: 2px; }
+  .tile .place { font-size: 8pt; color: var(--ink-2); }
+  .tile .score { font-size: 22pt; font-weight: 800; letter-spacing: -0.02em; margin: 4px 0 2px; }
+  .tile .score small { font-size: 9pt; font-weight: 600; color: var(--ink-3); }
+  .tile .tverdict { font-size: 7.9pt; color: var(--ink-2); line-height: 1.35; }
+
+  .findings { counter-reset: f; margin: 0; padding: 0; list-style: none; }
+  .findings li { position: relative; padding-left: 26px; margin-bottom: 4px; font-size: 8.5pt; line-height: 1.34; }
+  .findings li::before { counter-increment: f; content: counter(f); position: absolute; left: 0; top: 1px; width: 18px; height: 18px;
+                         border-radius: 50%; background: var(--teal); color: #fff; font-weight: 700; font-size: 8pt;
+                         display: flex; align-items: center; justify-content: center; }
+  .notice { margin-top: 8px; font-size: 7.5pt; color: var(--ink-2); border-top: 1px solid var(--hair); padding-top: 7px; }
+
+  /* Tables */
+  table { border-collapse: separate; border-spacing: 0; width: 100%; }
+  .tbl { font-size: 7.6pt; line-height: 1.3; }
+  .tbl th, .tbl td { padding: 3.5px 5px; vertical-align: top; border-bottom: 1px solid var(--hair); text-align: left; }
+  .tbl thead th { font-size: 8.2pt; color: #fff; font-weight: 700; padding: 7px 6px; border-bottom: none; }
+  .tbl thead th:first-child { background: var(--navy); border-radius: 8px 0 0 0; }
+  .tbl thead th:last-child { border-radius: 0 8px 0 0; }
+  .tbl tbody th { font-weight: 700; color: var(--navy); width: 15%; background: #f7f9fc; }
+  .th-lee { background: var(--lee); } .th-usama { background: var(--usama); color: #191919 !important; }
+  .th-ustun { background: var(--ustun); color: #191919 !important; } .th-fakhrul { background: var(--fakhrul); color: #191919 !important; }
+  .flag-good { color: var(--good); font-weight: 600; } .flag-bad { color: var(--bad); font-weight: 600; } .flag-warn { color: var(--warn); font-weight: 600; }
+  .q { color: var(--ink-2); font-style: italic; }
+
+  /* Heatmap */
+  .heat { font-size: 8.3pt; }
+  .heat th, .heat td { padding: 5px 7px; border-bottom: 2px solid #fff; }
+  .heat thead th { color: #fff; font-weight: 700; text-align: center; font-size: 8.6pt; }
+  .heat thead th.crit { text-align: left; background: var(--navy); border-radius: 8px 0 0 0; }
+  .heat thead th.w { background: var(--navy); }
+  .heat thead th:last-child { border-radius: 0 8px 0 0; }
+  .heat td.c { text-align: center; font-weight: 700; font-size: 10pt; border-left: 2px solid #fff; }
+  .heat td.crit { font-weight: 600; background: #f7f9fc; }
+  .heat td.crit span { display: block; font-weight: 400; color: var(--ink-2); font-size: 7.8pt; }
+  .heat td.w { text-align: center; color: var(--navy); font-weight: 700; background: #f7f9fc; }
+  .heat tr.total td { font-size: 12pt; font-weight: 800; background: #fff; border-top: 2px solid var(--navy); padding-top: 8px; }
+  .heat tr.total td.crit { font-size: 10pt; color: var(--navy); }
+  .heat tr.rank td { font-size: 8.4pt; font-weight: 700; color: var(--ink-2); text-align: center; background: #fff; }
+  .legend-row { display: flex; align-items: center; gap: 8px; font-size: 7.9pt; color: var(--ink-2); margin-top: 6px; flex-wrap: wrap; }
+  .legend-row .sw { width: 18px; height: 11px; border-radius: 3px; display: inline-block; }
+
+  /* Criterion blocks */
+  .crit-block { border: 1px solid var(--hair); border-radius: 11px; padding: 7px 10px 7px; margin-bottom: 7px; break-inside: avoid; }
+  .crit-head { display: flex; align-items: center; gap: 9px; margin-bottom: 6px; }
+  .crit-head .w { flex: none; background: var(--navy); color: #fff; font-weight: 800; border-radius: 7px; padding: 3px 7px; font-size: 9pt; }
+  .crit-head h3 { font-size: 11pt; color: var(--navy); flex: 1; }
+  .chips { display: flex; gap: 5px; }
+  .chip { font-size: 8.4pt; font-weight: 700; border-radius: 999px; padding: 2px 8px; white-space: nowrap; }
+  .chip.lee { background: var(--lee); color: #fff; } .chip.usama { background: var(--usama); color: #191919; }
+  .chip.ustun { background: var(--ustun); color: #191919; } .chip.fakhrul { background: var(--fakhrul); color: #191919; }
+  .crit-block .context { font-size: 8.1pt; color: var(--ink-2); margin-bottom: 5px; }
+  .why { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 12px; font-size: 7.95pt; line-height: 1.33; }
+  .why div { padding-left: 9px; border-left: 3px solid; }
+  .why .lee { border-color: var(--lee); } .why .usama { border-color: var(--usama); }
+  .why .ustun { border-color: var(--ustun); } .why .fakhrul { border-color: var(--fakhrul); }
+  .why b { font-weight: 700; }
+
+  /* Challenge */
+  .verdict { font-size: 7.6pt; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; border-radius: 6px; padding: 2px 6px; display: inline-block; white-space: nowrap; }
+  .v-partly { background: #fff1d6; color: #8a5300; }
+  .v-rejected { background: #fde3e3; color: #a02526; }
+  .v-upheld { background: #ddf3e1; color: #0a6b1c; }
+  .v-superseded { background: #e9ecf1; color: #4b5260; }
+  .claims { counter-reset: c; margin: 0; padding: 0; list-style: none; }
+  .claims li { break-inside: avoid; border: 1px solid var(--hair); border-radius: 10px; padding: 5px 9px 5px 36px; margin-bottom: 5px; position: relative; font-size: 8pt; line-height: 1.33; }
+  .claims li::before { counter-increment: c; content: counter(c); position: absolute; left: 9px; top: 8px; width: 20px; height: 20px; border-radius: 6px;
+                       background: var(--bad); color: #fff; font-weight: 800; font-size: 8.4pt; display: flex; align-items: center; justify-content: center; }
+  .claims .claim { font-weight: 700; }
+  .claims .src { color: var(--ink-3); font-size: 7.9pt; }
+  .kept { margin: 0; padding-left: 16px; font-size: 8pt; }
+  .kept li { margin-bottom: 3px; }
+
+  .box-teal { background: #e8f6f2; border-radius: 11px; padding: 10px 12px; border: 1px solid #c4ebe0; }
+  .box-amber { background: #fff6e3; border-radius: 11px; padding: 10px 12px; border: 1px solid #f6e0ae; }
+  .box-rose { background: #fdeeee; border-radius: 11px; padding: 10px 12px; border: 1px solid #f5d0d0; }
+  .box-blue { background: #eef4fd; border-radius: 11px; padding: 10px 12px; border: 1px solid #d3e3f9; }
+  .box-teal h3, .box-amber h3, .box-rose h3, .box-blue h3 { font-size: 10.4pt; margin-bottom: 5px; }
+  ul.tight { margin: 0; padding-left: 16px; } ul.tight li { margin-bottom: 3px; }
+  ol.steps { margin: 0; padding-left: 18px; } ol.steps li { margin-bottom: 4px; }
+
+  .ask { border-radius: 11px; padding: 9px 11px; border: 1px solid var(--hair); border-top: 5px solid; break-inside: avoid; }
+  .ask h4 { font-size: 10pt; margin-bottom: 4px; }
+  .ask ol { margin: 0; padding-left: 16px; font-size: 8pt; } .ask li { margin-bottom: 2px; }
+
+  .figure { border: 1px solid var(--hair); border-radius: 11px; padding: 10px 12px 8px; background: #fff; break-inside: avoid; }
+  .figure .ftitle { font-weight: 700; font-size: 10pt; }
+  .figure .fsub { font-size: 8pt; color: var(--ink-2); margin-bottom: 4px; }
+  svg text { font-family: Inter, "Liberation Sans", sans-serif; }
+
+  .refs { font-size: 7.9pt; color: var(--ink-2); padding-left: 16px; margin: 0; }
+  .refs li { margin-bottom: 2px; }
+  .signoff { margin-top: 12px; padding: 10px 12px; border-radius: 10px; background: linear-gradient(120deg, #0e3d7e, #00866c); color: #fff; font-size: 8.8pt; }
+</style>
+</head>
+<body>
+
+<!-- ========== PAGE 1 ========== -->
+<div class="banner">
+  <div class="stripe"></div>
+  <div class="kicker">Independent re-scoring · 25 November 2026</div>
+  <h1>Four OAGB revision propositions,<br>re-scored on your eight criteria</h1>
+  <div class="sub">Prof. Wei-Jei Lee · Dr Usama Iqbal · Dr Murat Üstün · Dr Fakhrul Islam, plus a challenge to the seven earlier comparisons</div>
+  <div class="meta">Prepared for M. Mohsin Chowdhury · Based on the four latest correspondence files and the seven earlier comparison reports in the Revision_Surgery folder</div>
+  <div class="dots"><span style="background:#257de0"></span><span style="background:#f47230"></span><span style="background:#00b894"></span><span style="background:#f2a600"></span></div>
+</div>
+
+<div class="grid-cover">
+  <div class="answer">
+    <p style="font-size:11pt;font-weight:700;color:#0e3d7e;margin-bottom:6px">The short answer</p>
+    <p>On your weighting, the two plans that <strong>remove the ulcerated join and rebuild it</strong> come out on top and are level: <strong>Dr Fakhrul Islam 7.1</strong> and <strong>Dr Usama Iqbal 7.1</strong> (7.12 against 7.07, a difference that means nothing). Dr Murat Üstün follows at 6.5 and Prof. Wei-Jei Lee at 6.4.</p>
+    <p>Dr Fakhrul has the better <em>design</em> (short limbs, best for iron and nutrition), but he is not offering to operate. Dr Usama's is the best plan you can book. <strong>The practical answer is Dr Usama's operation built to Dr Fakhrul's limb lengths</strong>, which would score about 7.8 once confirmed in writing.</p>
+    <p style="margin-bottom:0">Prof. Lee's plan is the <strong>safest on the day of surgery</strong> because it avoids a new stomach join. But it leaves the ulcer unsampled, sets H. pylori aside and lengthens the bypass.</p>
+  </div>
+  <div class="figure" style="padding-bottom:4px">
+    <div class="ftitle">Overall weighted score, out of 10</div>
+    <div class="fsub">Your eight criteria and weights. Each bar is one proposition as documented.</div>
+    <svg viewBox="0 0 330 202" width="100%" role="img" aria-label="Overall weighted scores">
+<line x1="86.0" y1="8" x2="86.0" y2="176" stroke="#e7e7e7" stroke-width="1"/>
+<text x="86.0" y="190" font-size="9" fill="#666" text-anchor="middle">0</text>
+<line x1="128.0" y1="8" x2="128.0" y2="176" stroke="#e7e7e7" stroke-width="1"/>
+<text x="128.0" y="190" font-size="9" fill="#666" text-anchor="middle">2</text>
+<line x1="170.0" y1="8" x2="170.0" y2="176" stroke="#e7e7e7" stroke-width="1"/>
+<text x="170.0" y="190" font-size="9" fill="#666" text-anchor="middle">4</text>
+<line x1="212.0" y1="8" x2="212.0" y2="176" stroke="#e7e7e7" stroke-width="1"/>
+<text x="212.0" y="190" font-size="9" fill="#666" text-anchor="middle">6</text>
+<line x1="254.0" y1="8" x2="254.0" y2="176" stroke="#e7e7e7" stroke-width="1"/>
+<text x="254.0" y="190" font-size="9" fill="#666" text-anchor="middle">8</text>
+<line x1="296.0" y1="8" x2="296.0" y2="176" stroke="#e7e7e7" stroke-width="1"/>
+<text x="296.0" y="190" font-size="9" fill="#666" text-anchor="middle">10</text>
+<text x="78" y="27.0" font-size="10" font-weight="700" fill="#191919" text-anchor="end">Fakhrul</text>
+<text x="78" y="39.0" font-size="8" fill="#666" text-anchor="end">advice only</text>
+<path d="M86,21.0 h145.5 a4,4 0 0 1 4,4 v8 a4,4 0 0 1 -4,4 h-145.5 z" fill="#f2a600"><title>Dr Fakhrul Islam: 7.12</title></path>
+<text x="241.5" y="33.0" font-size="11" font-weight="800" fill="#191919">7.1</text>
+<text x="78" y="69.0" font-size="10" font-weight="700" fill="#191919" text-anchor="end">Usama</text>
+<text x="78" y="81.0" font-size="8" fill="#666" text-anchor="end">would operate</text>
+<path d="M86,63.0 h144.4 a4,4 0 0 1 4,4 v8 a4,4 0 0 1 -4,4 h-144.4 z" fill="#f47230"><title>Dr Usama Iqbal: 7.07</title></path>
+<text x="240.4" y="75.0" font-size="11" font-weight="800" fill="#191919">7.1</text>
+<text x="78" y="111.0" font-size="10" font-weight="700" fill="#191919" text-anchor="end">Üstün</text>
+<text x="78" y="123.0" font-size="8" fill="#666" text-anchor="end">would operate</text>
+<path d="M86,105.0 h133.0 a4,4 0 0 1 4,4 v8 a4,4 0 0 1 -4,4 h-133.0 z" fill="#00b894"><title>Dr Murat Üstün: 6.53</title></path>
+<text x="229.0" y="117.0" font-size="11" font-weight="800" fill="#191919">6.5</text>
+<text x="78" y="153.0" font-size="10" font-weight="700" fill="#191919" text-anchor="end">Lee</text>
+<text x="78" y="165.0" font-size="8" fill="#666" text-anchor="end">would operate</text>
+<path d="M86,147.0 h129.9 a4,4 0 0 1 4,4 v8 a4,4 0 0 1 -4,4 h-129.9 z" fill="#257de0"><title>Prof. Wei-Jei Lee: 6.38</title></path>
+<text x="225.9" y="159.0" font-size="11" font-weight="800" fill="#191919">6.4</text>
+<line x1="86" y1="8" x2="86" y2="176" stroke="#c2c2c2" stroke-width="1"/>
+</svg>
+  </div>
+</div>
+
+<div class="grid4" style="margin-top:10px">
+  <div class="tile avoid"><div class="bar" style="background:#f2a600"></div>
+  <div class="rank">Joint 1st</div><div class="name">Dr Fakhrul Islam</div><div class="place">MNGHA Al Ahsa · advice only</div>
+  <div class="score">7.1<small> / 10</small></div><div class="tverdict">Best design for bile, iron and nutrition; advice only.</div></div>
+<div class="tile avoid"><div class="bar" style="background:#f47230"></div>
+  <div class="rank">Joint 1st</div><div class="name">Dr Usama Iqbal</div><div class="place">Aga Khan Univ. Hospital · Karachi</div>
+  <div class="score">7.1<small> / 10</small></div><div class="tverdict">Best bookable plan; limb lengths and H. pylori plan still open.</div></div>
+<div class="tile avoid"><div class="bar" style="background:#00b894"></div>
+  <div class="rank">3rd</div><div class="name">Dr Murat Üstün</div><div class="place">Istanbul Bariatric Center · Türkiye</div>
+  <div class="score">6.5<small> / 10</small></div><div class="tverdict">Most careful preparation; the operation itself is undefined.</div></div>
+<div class="tile avoid"><div class="bar" style="background:#257de0"></div>
+  <div class="rank">4th</div><div class="name">Prof. Wei-Jei Lee</div><div class="place">China Medical Univ. Hsinchu · Taiwan</div>
+  <div class="score">6.4<small> / 10</small></div><div class="tverdict">Safest on the day; ulcer left unsampled, bypass lengthened.</div></div>
+</div>
+
+<div class="card plane avoid" style="margin-top:10px">
+  <h3 style="color:#00866c">Three findings that change the earlier picture</h3>
+  <ol class="findings">
+    <li><b>Prof. Lee's first place came from how experience was weighted, not from his plan.</b> The three reports that ranked him first gave experience, volume or "hardware" 15 to 20% of the score and scored his clinical plan generously. Your scale gives international exposure 3%. His real strength, the smaller operation, still earns the top safety score.</li>
+    <li><b>The acid-only argument for vagotomy is weaker than it looks.</b> The ulcer was still large in September after about 12 weeks of vonoprazan 20 mg twice daily, which suppresses acid more completely than a vagotomy usually does. H. pylori was still positive after the first course. Bile, infection and a poorly supplied old join matter as much as acid, and removing the ulcer, diverting bile and confirming H. pylori cure answer more of them.</li>
+    <li><b>Limb-length arithmetic was mostly missed.</b> Bowel that food travels without bile is 155 cm today. Prof. Lee's plan makes it about 190 to 215 cm; Dr Fakhrul's about 125 to 135 cm. Dr Usama and Dr Üstün give no figures. A "standard" food limb on the existing 155 cm bile limb would make it 230 to 305 cm, the worst result for iron. This is the key question for Dr Usama.</li>
+  </ol>
+</div>
+
+<div class="notice">Decision support only, not medical advice. The scores rate each written proposition against your criteria. They do not rate a surgeon's skill and they do not predict your outcome. They rest on the emails and the published literature, not on an examination, your endoscopy images or what a surgeon finds at operation. The final decision belongs with you and the surgeon who examines you.</div>
+
+<!-- ========== PAGE 2 ========== -->
+<div class="page-break"></div>
+<div class="sec"><span class="num">1</span><h2>What is new, and what each surgeon now proposes</h2></div>
+<div class="box-blue avoid" style="margin-bottom:10px">
+  <h3 style="color:#0e3d7e">What changed since the 15 November reports</h3>
+  <ul class="tight">
+    <li><b>Dr Fakhrul Islam:</b> the only new material. A note, not quoted in any earlier report, now confirms he has made <b>no commercial proposal and no follow-up treatment proposal</b>, and that he is a personal adviser. His design therefore cannot be booked as it stands.</li>
+    <li><b>Prof. Lee</b> (4 to 7 Nov) and the <b>Istanbul Bariatric Center</b> (12 to 16 Oct): the files are byte-for-byte identical to the versions previously in the folder.</li>
+    <li><b>Dr Usama Iqbal:</b> the file ends with his 14 November reply, which the 15 November reports already had. He will take further questions only by teleconsultation.</li>
+    <li><b>So any change in score comes from your new criteria and from correcting the earlier analyses</b>, not from new surgical facts.</li>
+  </ul>
+</div>
+<table class="tbl">
+  <thead><tr>
+    <th style="width:14%"> </th>
+    <th class="th-lee" style="width:21.5%">Prof. Wei-Jei Lee<br><span style="font-weight:500">Would operate · Taiwan</span></th>
+    <th class="th-usama" style="width:21.5%">Dr Usama Iqbal<br><span style="font-weight:500">Would operate · AKU Karachi</span></th>
+    <th class="th-ustun" style="width:21.5%">Dr Murat Üstün<br><span style="font-weight:500">Would operate · Istanbul</span></th>
+    <th class="th-fakhrul" style="width:21.5%">Dr Fakhrul Islam<br><span style="font-weight:500">Advice only · Saudi Arabia</span></th>
+  </tr></thead>
+  <tbody>
+    <tr><th>Ulcerated join</th><td>Kept, with circumferential sutures from outside over a "tent tube"</td><td class="flag-good">Resected; new join made</td><td>Revised or removed <span class="q">"if required"</span></td><td class="flag-good">Refashioned (taken down and rebuilt)</td></tr>
+    <tr><th>Truncal vagotomy</th><td>Yes: <span class="q">"most important"</span></td><td>No: <span class="q">"obsolete"</span></td><td>Not mentioned</td><td>No: <span class="q">"not valid for me"</span></td></tr>
+    <tr><th>Bile limb / food limb</th><td>~150 cm kept / 40 cm (60 if bowel long)</td><td>Measured and <span class="q">"tailored to BMI"</span>; no figures</td><td>"Standard RYGB"; no figures</td><td class="flag-good">50 to 60 cm / 75 cm</td></tr>
+    <tr><th>Bypassed bowel (today 155 cm)</th><td class="flag-bad">≈190 to 215 cm (longer)</td><td class="flag-warn">Unknown: 125 to 305 cm depending on choice</td><td class="flag-warn">Unknown: as Dr Usama</td><td class="flag-good">≈125 to 135 cm (shorter)</td></tr>
+    <tr><th>Hiatal hernia</th><td>Repair after reducing all herniated tissue</td><td><span class="q">"Will definitely be repaired"</span></td><td>If confirmed appropriate (+£1,000)</td><td><span class="q">"At least cruroplasty"</span> if possible</td></tr>
+    <tr><th>Gallbladder</th><td>Remove (agreed 7 Nov)</td><td>Remove (recommended after any bypass)</td><td><span class="q">"Could be considered"</span> (+£1,000)</td><td><span class="q">"Must"</span> be removed</td></tr>
+    <tr><th>H. pylori</th><td class="flag-bad"><span class="q">"Not on priority list"</span></td><td>Treat only if the resected join shows it</td><td class="flag-good">Confirm eradication under a safe plan; specialist retreatment</td><td class="flag-good"><span class="q">"Must be eradicated"</span></td></tr>
+    <tr><th>Tissue diagnosis</th><td class="flag-bad"><span class="q">"No need to biopsy"</span></td><td class="flag-good">Resected join to histopathology</td><td>Not specified</td><td>Not mentioned</td></tr>
+    <tr><th>Acid control afterwards</th><td>Vagotomy. PPI wording is ambiguous: <span class="q">"no specific medication after surgery"</span> vs <span class="q">"should not stop PPI before TV and ulcer healing"</span></td><td>PPI for 6 months, then as needed</td><td>Not stated</td><td>PPI <span class="q">"for a lengthy period"</span>; no NSAIDs</td></tr>
+    <tr><th>Check the ulcer healed</th><td>Endoscopy at 3 months to 1 year <span class="q">"if you wish"</span></td><td class="flag-bad"><span class="q">"Follow up as per symptoms"</span></td><td>Not stated</td><td>Not stated</td></tr>
+    <tr><th>Pre-op work-up</th><td><span class="q">"Not really needed"</span></td><td>11 blood tests (incl. iron/TIBC, B12, D3, TSH) and an anaesthesia clinic</td><td class="flag-good">Most thorough: medicines reconciled, iron, nutrition, cardiac, anaesthesia for methylphenidate and hypersomnia</td><td>Left to the operating surgeon</td></tr>
+    <tr><th>Stated experience</th><td>OAGB since 2000; ~30 of this exact operation, <span class="q">"no complication"</span></td><td>~30 revisions of all types, no complications; ~25 hernia repairs a year</td><td class="flag-bad">Asked on 12 and 15 Oct; not answered</td><td>Assistant Consultant, MNGHA; IFASMBS, MRCS</td></tr>
+    <tr><th>Stay / time abroad</th><td>1 to 2 days / about 1 week</td><td>1 to 2 days / 1 to 2 weeks</td><td>3 to 4 nights / about 10 days, fit-to-fly review</td><td>Suggests the USA</td></tr>
+    <tr><th>Quoted cost</th><td>≈US$10,000 (US$15,000 robotic)</td><td>PKR 1.50 to 2.05 m (≈US$5,400 to 7,400)</td><td>£7,350 (≈US$9,900)</td><td>None</td></tr>
+  </tbody>
+</table>
+<p style="font-size:7.8pt;color:#666;margin-top:5px">"Bypassed bowel" means the bile limb plus the food limb: the stretch of small bowel where food travels without bile and pancreatic juice. In the 2017 OAGB it is the 155 cm bile limb alone. Green marks a strength and red a weakness on that row. Quotation marks show the surgeon's own words.</p>
+
+<!-- ========== PAGE 3 ========== -->
+<div class="avoid">
+<div class="sec"><span class="num">2</span><h2>The scorecard</h2></div>
+<p class="lede-block">Each criterion is scored from 0 to 10 and multiplied by your weight. Darker cells mean higher scores. The reasons for every cell follow in section 3.</p>
+<table class="heat"><thead><tr><th class="crit" style="width:44%">Criterion</th><th class="w" style="width:8%">Weight</th><th class="th-lee" style="background:#257de0;color:#ffffff">Lee</th><th class="th-usama" style="background:#f47230;color:#191919">Usama</th><th class="th-ustun" style="background:#00b894;color:#191919">Üstün</th><th class="th-fakhrul" style="background:#f2a600;color:#191919">Fakhrul</th></tr></thead>
+<tbody><tr><td class="crit">1. Ulcer healing and re-bleed prevention<span>Removes or heals the ulcer; deals with acid, bile and H. pylori; checks healing</span></td><td class="w">25%</td><td class="c tnum" style="background:#6aabf1;color:#191919">6.0</td><td class="c tnum" style="background:#2370cd;color:#ffffff">7.5 ★</td><td class="c tnum" style="background:#6aabf1;color:#191919">6.5</td><td class="c tnum" style="background:#2370cd;color:#ffffff">7.5 ★</td></tr><tr><td class="crit">2. Bile reflux control<span>How reliably bile is kept off the pouch and join</span></td><td class="w">10%</td><td class="c tnum" style="background:#2370cd;color:#ffffff">7.0</td><td class="c tnum" style="background:#1757ac;color:#ffffff">8.0</td><td class="c tnum" style="background:#2370cd;color:#ffffff">7.5</td><td class="c tnum" style="background:#0e3d7e;color:#ffffff">9.0 ★</td></tr><tr><td class="crit">3. Operative safety<span>Size of the operation, new joins in ulcerated tissue, safety net and surgeon</span></td><td class="w">20%</td><td class="c tnum" style="background:#1757ac;color:#ffffff">8.0 ★</td><td class="c tnum" style="background:#6aabf1;color:#191919">6.5</td><td class="c tnum" style="background:#6aabf1;color:#191919">6.0</td><td class="c tnum" style="background:#9dc8f7;color:#191919">5.0</td></tr><tr><td class="crit">4. Nutrition, anatomy and long-term function<span>Limb lengths, bypassed bowel, common channel, lasting side-effects</span></td><td class="w">15%</td><td class="c tnum" style="background:#6aabf1;color:#191919">6.0</td><td class="c tnum" style="background:#2370cd;color:#ffffff">7.0</td><td class="c tnum" style="background:#6aabf1;color:#191919">6.5</td><td class="c tnum" style="background:#0e3d7e;color:#ffffff">9.0 ★</td></tr><tr><td class="crit">5. Completeness and diagnostic rigour<span>Hernia, gallbladder, biopsy, H. pylori, work-up, follow-up</span></td><td class="w">10%</td><td class="c tnum" style="background:#cce3fd;color:#191919">4.5</td><td class="c tnum" style="background:#2370cd;color:#ffffff">7.0</td><td class="c tnum" style="background:#1757ac;color:#ffffff">8.0 ★</td><td class="c tnum" style="background:#9dc8f7;color:#191919">5.5</td></tr><tr><td class="crit">6. Safeguard of iron deficiency<span>Stops the blood loss, limits malabsorption, plans monitoring</span></td><td class="w">10%</td><td class="c tnum" style="background:#cce3fd;color:#191919">4.5</td><td class="c tnum" style="background:#6aabf1;color:#191919">6.5</td><td class="c tnum" style="background:#6aabf1;color:#191919">6.0</td><td class="c tnum" style="background:#1757ac;color:#ffffff">8.5 ★</td></tr><tr><td class="crit">7. Other technical issues<span>Hiatal technique, mesenteric closure, pouch, drains, details</span></td><td class="w">7%</td><td class="c tnum" style="background:#2370cd;color:#ffffff">7.0</td><td class="c tnum" style="background:#2370cd;color:#ffffff">7.5 ★</td><td class="c tnum" style="background:#9dc8f7;color:#191919">5.0</td><td class="c tnum" style="background:#9dc8f7;color:#191919">5.5</td></tr><tr><td class="crit">8. International exposure of the surgeon<span>International standing, training and practice</span></td><td class="w">3%</td><td class="c tnum" style="background:#0e3d7e;color:#ffffff">9.5 ★</td><td class="c tnum" style="background:#9dc8f7;color:#191919">5.5</td><td class="c tnum" style="background:#2370cd;color:#ffffff">7.5</td><td class="c tnum" style="background:#2370cd;color:#ffffff">7.0</td></tr>
+<tr class="total"><td class="crit">Weighted score out of 10</td><td class="w">100%</td><td class="c tnum" style="color:#0e3d7e">6.38</td><td class="c tnum" style="color:#0e3d7e">7.07</td><td class="c tnum" style="color:#0e3d7e">6.53</td><td class="c tnum" style="color:#0e3d7e">7.12</td></tr>
+<tr class="rank"><td></td><td></td><td>4th</td><td>Joint 1st</td><td>3rd</td><td>Joint 1st</td></tr></tbody></table>
+<div class="legend-row">Score: <span class="sw" style="background:#cce3fd"></span>below 5 <span class="sw" style="background:#9dc8f7"></span>5 to 5.9 <span class="sw" style="background:#6aabf1"></span>6 to 6.9 <span class="sw" style="background:#2370cd"></span>7 to 7.9 <span class="sw" style="background:#1757ac"></span>8 to 8.9 <span class="sw" style="background:#0e3d7e"></span>9 and above &nbsp;·&nbsp; ★ highest on that criterion</div>
+</div>
+
+<div class="grid2" style="margin-top:12px">
+  <div class="card avoid">
+    <h3 style="color:#0e3d7e">Reading the table</h3>
+    <ul class="tight">
+      <li><b>Prof. Lee leads operative safety (8.0) and international exposure (9.5).</b> He trails on completeness (4.5) and iron (4.5): no biopsy, H. pylori set aside, and a longer bypass for a man whose iron deficiency predates the bleed.</li>
+      <li><b>Dr Usama is the most even.</b> He has no score below 5.5 and leads ulcer healing jointly. He loses points on limb figures he will not put in writing, an H. pylori plan that depends on one histology result, and follow-up "as per symptoms".</li>
+      <li><b>Dr Üstün's team leads diagnostic rigour (8.0)</b> but has not defined the operation, the limb lengths or the surgeon's own numbers.</li>
+      <li><b>Dr Fakhrul leads bile, nutrition and iron</b> (9.0, 9.0 and 8.5). His operative safety is the lowest (5.0): his is the biggest reconstruction, and he names no surgeon.</li>
+    </ul>
+  </div>
+  <div class="card avoid">
+    <h3 style="color:#0e3d7e">Does the order survive other weightings?</h3>
+    <table class="tbl"><thead><tr><th>Weighting</th><th style="background:#257de0;color:#ffffff;text-align:center">Lee</th><th style="background:#f47230;color:#191919;text-align:center">Usama</th><th style="background:#00b894;color:#191919;text-align:center">Üstün</th><th style="background:#f2a600;color:#191919;text-align:center">Fakhrul</th></tr></thead><tbody><tr><th style="width:40%;font-weight:600;color:#191919;background:#f7f9fc">Your weights</th><td class="tnum" style="text-align:center;">6.38</td><td class="tnum" style="text-align:center;">7.07</td><td class="tnum" style="text-align:center;">6.53</td><td class="tnum" style="text-align:center;font-weight:800;color:#0e3d7e;background:#eef4fd">7.12</td></tr><tr><th style="width:40%;font-weight:600;color:#191919;background:#f7f9fc">Equal weights (12.5% each)</th><td class="tnum" style="text-align:center;">6.56</td><td class="tnum" style="text-align:center;">6.94</td><td class="tnum" style="text-align:center;">6.63</td><td class="tnum" style="text-align:center;font-weight:800;color:#0e3d7e;background:#eef4fd">7.13</td></tr><tr><th style="width:40%;font-weight:600;color:#191919;background:#f7f9fc">Operative safety raised to 35%</th><td class="tnum" style="text-align:center;">6.68</td><td class="tnum" style="text-align:center;font-weight:800;color:#0e3d7e;background:#eef4fd">6.96</td><td class="tnum" style="text-align:center;">6.43</td><td class="tnum" style="text-align:center;">6.72</td></tr><tr><th style="width:40%;font-weight:600;color:#191919;background:#f7f9fc">International exposure raised to 15%</th><td class="tnum" style="text-align:center;">6.76</td><td class="tnum" style="text-align:center;">6.87</td><td class="tnum" style="text-align:center;">6.65</td><td class="tnum" style="text-align:center;font-weight:800;color:#0e3d7e;background:#eef4fd">7.11</td></tr><tr><th style="width:40%;font-weight:600;color:#191919;background:#f7f9fc">Ulcer, bile and safety only</th><td class="tnum" style="text-align:center;">6.91</td><td class="tnum" style="text-align:center;font-weight:800;color:#0e3d7e;background:#eef4fd">7.23</td><td class="tnum" style="text-align:center;">6.50</td><td class="tnum" style="text-align:center;">6.86</td></tr></tbody></table>
+    <p style="font-size:8pt;color:#666;margin:6px 0 0">Dr Usama is first or second under every weighting tested. Prof. Lee is never first. To lead, he would need operative safety and reputation to outweigh ulcer healing, iron and nutrition combined.</p>
+  </div>
+</div>
+
+<!-- ========== PAGES 4-5: CRITERIA ========== -->
+<div class="page-break"></div>
+<div class="sec"><span class="num">3</span><h2>Why each score: criterion by criterion</h2></div>
+
+<div class="crit-block"><div class="crit-head"><span class="w">25%</span><h3>1. Ulcer healing and re-bleed prevention</h3><div class="chips"><span class="chip lee">Lee 6.0</span><span class="chip usama">Usama 7.5</span><span class="chip ustun">Üstün 6.5</span><span class="chip fakhrul">Fakhrul 7.5</span></div></div>
+<div class="context">The ulcer was still "large, chronic" on 9 September after about 12 weeks of vonoprazan 20 mg twice daily with sucralfate. That endoscopy came 10 days after stopping, so some of it may be rebound. H. pylori was still positive after the first course. The bleed 9 days after stopping shows acid matters for <i>bleeding</i>. The failure to heal points to bile, persistent infection and a poorly supplied old join as well.</div><div class="why"><div class="lee"><b>6.0.</b> Diverts bile and adds vagotomy, but leaves the bleeding ulcer in place and unsampled. The external "circumferential suture" has no published series for a bleeding ulcer. H. pylori is "not on priority list"; endoscopy only "if you wish"; plan B only for stenosis.</div><div class="usama"><b>7.5.</b> Removes the ulcer and sends it for histopathology; diverts bile; PPI for 6 months. Loses points because H. pylori is treated only if histology is positive (unreliable on PPI and on a jejunal specimen), and healing is checked only "as per symptoms".</div><div class="ustun"><b>6.5.</b> Wants a stable haemoglobin, an improving ulcer and an H. pylori plan before surgery, and does not blame bile alone. But removing the ulcer is decided "if required", and there is no stated acid plan or check of healing afterwards.</div><div class="fakhrul"><b>7.5.</b> Rebuilds the join, gives PPI "for a lengthy period", and says H. pylori "must be eradicated" and NSAIDs avoided. Loses points for blaming bile almost alone and for stating no pathology or endoscopy check.</div></div></div>
+<div class="crit-block"><div class="crit-head"><span class="w">10%</span><h3>2. Bile reflux control</h3><div class="chips"><span class="chip lee">Lee 7.0</span><span class="chip usama">Usama 8.0</span><span class="chip ustun">Üstün 7.5</span><span class="chip fakhrul">Fakhrul 9.0</span></div></div>
+<div class="context">All four divert bile with a Roux-en-Y. They differ in the length of food limb between the pouch and the point where bile rejoins. Published OAGB conversions used food limbs of roughly 60 to 100 cm.</div><div class="why"><div class="lee"><b>7.0.</b> A 40 cm food limb, 60 cm "if CC is long", is the shortest of the four. It usually works, but with the least margin.</div><div class="usama"><b>8.0.</b> A full Roux-en-Y with limbs "tailored"; any usual food limb keeps bile well away. No figure given.</div><div class="ustun"><b>7.5.</b> "Standard RYGB" would divert bile well, but nothing is specified. Reversal is held as an alternative.</div><div class="fakhrul"><b>9.0.</b> A 75 cm food limb, explicit and within the published range.</div></div></div>
+<div class="crit-block"><div class="crit-head"><span class="w">20%</span><h3>3. Operative safety</h3><div class="chips"><span class="chip lee">Lee 8.0</span><span class="chip usama">Usama 6.5</span><span class="chip ustun">Üstün 6.0</span><span class="chip fakhrul">Fakhrul 5.0</span></div></div>
+<div class="context">The step most prone to leaks and narrowing in a revision is a new stomach-to-bowel join. In the 2019 comparison, 13 rebuilt joins had 1 leak and 2 strictures. Safety also includes the safety net: time in hospital, time before flying, anaesthetic planning and the surgeon's own record.</div><div class="why"><div class="lee"><b>8.0.</b> No new stomach join; reports ~30 such cases without complication (unaudited). Against: vagotomy plus hernia repair plus gallbladder, an afferent-limb staple line 2 cm from the ulcer, no drain, 1 to 2 days in hospital and flying within ~a week.</div><div class="usama"><b>6.5.</b> A new join in scarred revisional tissue, plus a bowel join, hernia repair and gallbladder. A JCI university hospital, an anaesthesia clinic, the surgeon operating himself, and 1 to 2 weeks in Pakistan. His ~30 revisions are mixed and unaudited.</div><div class="ustun"><b>6.0.</b> The operation is undefined and the surgeon's revision numbers went unanswered twice; the letters are signed by the coordination team. Strengths: 3 to 4 nights, ~10 days with a fit-to-fly review, a staged fallback, and anaesthetic planning for methylphenidate.</div><div class="fakhrul"><b>5.0.</b> The biggest reconstruction: a new join, a shortened bile limb, and likely a third closure or resection where the old ulcerated jejunum is taken down. No surgeon or hospital is named to stand behind it.</div></div></div>
+<div class="crit-block"><div class="crit-head"><span class="w">15%</span><h3>4. Nutrition, anatomy and long-term function</h3><div class="chips"><span class="chip lee">Lee 6.0</span><span class="chip usama">Usama 7.0</span><span class="chip ustun">Üstün 6.5</span><span class="chip fakhrul">Fakhrul 9.0</span></div></div>
+<div class="context">Bypassed bowel (bile limb + food limb) is 155 cm today. Your BMI is 27 and your iron deficiency recurs, so the aim is to fix the ulcer and the reflux without adding malabsorption. The 2024 consensus asks for whole-bowel measurement and a common channel of at least 300 to 400 cm.</div><div class="why"><div class="lee"><b>6.0.</b> Bypassed bowel ≈190 to 215 cm, longer than today. The common channel stays above ~390 cm, which is acceptable. A permanent vagotomy has poorly charted long-term bowel effects.</div><div class="usama"><b>7.0.</b> "Measure and tailor to BMI" is the right principle, but no numbers. With the 155 cm bile limb kept and a usual food limb, bypassed bowel would reach 230 to 305 cm.</div><div class="ustun"><b>6.5.</b> Aims to "avoid unwanted further weight loss", but "standard RYGB" figures would lengthen the bypass. Nothing specified.</div><div class="fakhrul"><b>9.0.</b> Bypassed bowel ≈125 to 135 cm, shorter than today; no vagotomy. Some weight regain is possible and acceptable at BMI 27.</div></div></div>
+<div class="crit-block"><div class="crit-head"><span class="w">10%</span><h3>5. Completeness and diagnostic rigour</h3><div class="chips"><span class="chip lee">Lee 4.5</span><span class="chip usama">Usama 7.0</span><span class="chip ustun">Üstün 8.0</span><span class="chip fakhrul">Fakhrul 5.5</span></div></div>
+<div class="context">A complete plan covers the hernia, the gallbladder, tissue diagnosis, an H. pylori test of cure, fitness for anaesthesia, nutrition, and an endoscopy to confirm healing. None of the four has asked for a fresh endoscopy since the 9 September bleed. Dr Üstün offers imaging "if needed".</div><div class="why"><div class="lee"><b>4.5.</b> Answered every question point by point. But: no biopsy, H. pylori deferred, "nutritional optimisation not really needed", endoscopy optional, and the PPI wording is ambiguous.</div><div class="usama"><b>7.0.</b> All three problems in one plan; 11 blood tests including TSH, iron and vitamin D; anaesthesia clinic; histopathology. Gaps: no pre-op endoscopy, conditional H. pylori, follow-up by symptoms, limb figures withheld.</div><div class="ustun"><b>8.0.</b> The most rigorous: reconciled the medicines, queried the dexlansoprazole dose, planned a safe H. pylori test of cure, iron and micronutrients, cardiac and anaesthetic review, asked for the MRI and echo reports, and followed up the colon lesion.</div><div class="fakhrul"><b>5.5.</b> Covers the hernia, gallbladder, H. pylori, PPI, diet, NSAIDs and lifelong vitamins. No work-up, pathology or follow-up schedule.</div></div></div>
+<div class="crit-block"><div class="crit-head"><span class="w">10%</span><h3>6. Safeguard of iron deficiency</h3><div class="chips"><span class="chip lee">Lee 4.5</span><span class="chip usama">Usama 6.5</span><span class="chip ustun">Üstün 6.0</span><span class="chip fakhrul">Fakhrul 8.5</span></div></div>
+<div class="context">Your iron deficiency <b>predates</b> the bleed. In February 2025 haemoglobin was 10.0, MCV 67 and ferritin 4.55, when endoscopy showed only erosions. It is therefore likely mixed: slow blood loss plus reduced absorption. No plan reconnects the duodenum, so monitoring is lifelong whichever is chosen.</div><div class="why"><div class="lee"><b>4.5.</b> "Anaemia will subside after your ulcer is treated" and "usually in female… not in male" are only half right. Stopping the bleeding helps, but his plan lengthens the bypass and gives no iron plan.</div><div class="usama"><b>6.5.</b> Removes the bleeding source at once; tested iron/TIBC and TSH (relevant to cold sensitivity); tailors the limbs. No written iron plan; your 1 November question on iron and cold was not answered in writing.</div><div class="ustun"><b>6.0.</b> Ferritin, iron profile and micronutrients; a dietitian and one month of supplements; aims to protect nutrition. No limb plan, and removal of the ulcer is conditional.</div><div class="fakhrul"><b>8.5.</b> The shortest bypass, the ulcer removed, lifelong bariatric vitamins and a nutritionist. No monitoring schedule.</div></div></div>
+<div class="crit-block"><div class="crit-head"><span class="w">7%</span><h3>7. Other technical issues</h3><div class="chips"><span class="chip lee">Lee 7.0</span><span class="chip usama">Usama 7.5</span><span class="chip ustun">Üstün 5.0</span><span class="chip fakhrul">Fakhrul 5.5</span></div></div>
+<div class="context">Hiatal technique, closure of the mesenteric defects (internal-hernia prevention), pouch size, drains and tubes, stapling and operative detail.</div><div class="why"><div class="lee"><b>7.0.</b> Reduces all herniated tissue; closes the mesenteric defect; calibrates with a tube (3 to 4 cm); correctly rejects highly selective vagotomy because of the pouch's blood supply; a 2 cm stump margin. No drain or NG tube (debatable), and no pouch resizing.</div><div class="usama"><b>7.5.</b> Mesenteric closure "essential"; the hernia "definitely" repaired; gallbladder out; named stapler platform; operates with his fellow; measures the bowel. Silent on pouch size and leak testing.</div><div class="ustun"><b>5.0.</b> The hernia and gallbladder are conditional and priced as add-ons. No mesenteric closure or technique detail.</div><div class="fakhrul"><b>5.5.</b> Cruroplasty "if possible"; gallbladder "must" come out. Other steps are left to the surgeon's "instant considerations"; mesenteric closure is not stated.</div></div></div>
+<div class="crit-block"><div class="crit-head"><span class="w">3%</span><h3>8. International exposure of the surgeon</h3><div class="chips"><span class="chip lee">Lee 9.5</span><span class="chip usama">Usama 5.5</span><span class="chip ustun">Üstün 7.5</span><span class="chip fakhrul">Fakhrul 7.0</span></div></div>
+<div class="context">Weighted at 3% on your scale. Checked against public profiles on 25 November 2026 where possible.</div><div class="why"><div class="lee"><b>9.5.</b> Past president of the IFSO Asia-Pacific Chapter and founder of the Asia-Pacific society (2004); an OAGB pioneer with a randomised trial of OAGB against RYGB.</div><div class="usama"><b>5.5.</b> AKU's primary bariatric and upper-GI surgeon. International training is not documented in the files and no public profile was found.</div><div class="ustun"><b>7.5.</b> Practises in Istanbul and London with an international-patient programme. Listings differ on his hospital.</div><div class="fakhrul"><b>7.0.</b> MRCS (RCSI, Ireland), Strasbourg laparoscopy diploma and IFASMBS; practises in Saudi Arabia.</div></div></div>
+
+<!-- ========== PAGE 6: CHALLENGE ========== -->
+<div class="page-break"></div>
+<div class="sec"><span class="num">4</span><h2>Challenging the earlier comparisons</h2></div>
+<p class="lede-block">The seven earlier reports agree on the core operation, a conversion to Roux-en-Y, but split four to three on who comes first. Prof. Lee's scores range from 6.2 to 9.1, the widest spread of the four. That spread is a sign his rank depends on weighting, not on facts.</p>
+<div class="figure">
+  <div class="ftitle">Earlier scores against this review, normalised to a 10-point scale</div>
+  <div class="fsub">Grey dots: the seven earlier reports (the first 8 November report did not score Prof. Lee). Coloured diamond: this review on your eight criteria. Grey line: the spread of the earlier reports.</div>
+  <svg viewBox="0 0 700 224" width="100%" role="img" aria-label="Earlier scores versus this review">
+<line x1="130.0" y1="10" x2="130.0" y2="194" stroke="#e7e7e7"/>
+<text x="130.0" y="208" font-size="9" fill="#666" text-anchor="middle">5.5</text>
+<line x1="192.5" y1="10" x2="192.5" y2="194" stroke="#e7e7e7"/>
+<text x="192.5" y="208" font-size="9" fill="#666" text-anchor="middle">6.0</text>
+<line x1="255.0" y1="10" x2="255.0" y2="194" stroke="#e7e7e7"/>
+<text x="255.0" y="208" font-size="9" fill="#666" text-anchor="middle">6.5</text>
+<line x1="317.5" y1="10" x2="317.5" y2="194" stroke="#e7e7e7"/>
+<text x="317.5" y="208" font-size="9" fill="#666" text-anchor="middle">7.0</text>
+<line x1="380.0" y1="10" x2="380.0" y2="194" stroke="#e7e7e7"/>
+<text x="380.0" y="208" font-size="9" fill="#666" text-anchor="middle">7.5</text>
+<line x1="442.5" y1="10" x2="442.5" y2="194" stroke="#e7e7e7"/>
+<text x="442.5" y="208" font-size="9" fill="#666" text-anchor="middle">8.0</text>
+<line x1="505.0" y1="10" x2="505.0" y2="194" stroke="#e7e7e7"/>
+<text x="505.0" y="208" font-size="9" fill="#666" text-anchor="middle">8.5</text>
+<line x1="567.5" y1="10" x2="567.5" y2="194" stroke="#e7e7e7"/>
+<text x="567.5" y="208" font-size="9" fill="#666" text-anchor="middle">9.0</text>
+<line x1="630.0" y1="10" x2="630.0" y2="194" stroke="#e7e7e7"/>
+<text x="630.0" y="208" font-size="9" fill="#666" text-anchor="middle">9.5</text>
+<text x="380.0" y="221" font-size="9" fill="#666" text-anchor="middle">score out of 10</text>
+<text x="120" y="32.0" font-size="10.5" font-weight="700" fill="#191919" text-anchor="end">Prof. Wei-Jei Lee</text>
+<text x="120" y="44.0" font-size="8.5" fill="#666" text-anchor="end">earlier spread 6.2 to 9.1</text>
+<line x1="217.5" y1="33.0" x2="580.0" y2="33.0" stroke="#b8bcc4" stroke-width="2" stroke-linecap="round"/>
+<circle cx="305.0" cy="33.0" r="4.5" fill="#8f95a0" stroke="#fff" stroke-width="2"><title>8 Nov · Comparison of Surgical Propositions (PDF): 6.9</title></circle>
+<circle cx="417.5" cy="33.0" r="4.5" fill="#8f95a0" stroke="#fff" stroke-width="2"><title>15 Nov · Claude-Fable Rev2: 7.8</title></circle>
+<circle cx="567.5" cy="33.0" r="4.5" fill="#8f95a0" stroke="#fff" stroke-width="2"><title>15 Nov · Gemini report: 9.0</title></circle>
+<circle cx="580.0" cy="33.0" r="4.5" fill="#8f95a0" stroke="#fff" stroke-width="2"><title>Interactive dashboard (HTML): 9.1</title></circle>
+<circle cx="217.5" cy="33.0" r="4.5" fill="#8f95a0" stroke="#fff" stroke-width="2"><title>15 Nov · Kiro GPT 5.6: 6.2</title></circle>
+<circle cx="292.5" cy="33.0" r="4.5" fill="#8f95a0" stroke="#fff" stroke-width="2"><title>15 Nov · ChatGPT ToolnextIT: 6.8</title></circle>
+<path d="M239.4,24.0 L248.4,33.0 L239.4,42.0 L230.4,33.0 Z" fill="#257de0" stroke="#fff" stroke-width="2"><title>This review: 6.38</title></path>
+<text x="638" y="37.0" font-size="10.5" font-weight="800" fill="#191919">6.4</text>
+<text x="120" y="78.0" font-size="10.5" font-weight="700" fill="#191919" text-anchor="end">Dr Usama Iqbal</text>
+<text x="120" y="90.0" font-size="8.5" fill="#666" text-anchor="end">earlier spread 6.9 to 8.9</text>
+<line x1="305.0" y1="79.0" x2="555.0" y2="79.0" stroke="#b8bcc4" stroke-width="2" stroke-linecap="round"/>
+<circle cx="430.0" cy="79.0" r="4.5" fill="#8f95a0" stroke="#fff" stroke-width="2"><title>8 Nov · Comparison of Surgical Propositions (PDF): 7.9</title></circle>
+<circle cx="380.0" cy="79.0" r="4.5" fill="#8f95a0" stroke="#fff" stroke-width="2"><title>8 Nov · Three Propositions Compared to Lee (HTML): 7.5</title></circle>
+<circle cx="305.0" cy="79.0" r="4.5" fill="#8f95a0" stroke="#fff" stroke-width="2"><title>15 Nov · Claude-Fable Rev2: 6.9</title></circle>
+<circle cx="555.0" cy="79.0" r="4.5" fill="#8f95a0" stroke="#fff" stroke-width="2"><title>15 Nov · Gemini report: 8.9</title></circle>
+<circle cx="505.0" cy="79.0" r="4.5" fill="#8f95a0" stroke="#fff" stroke-width="2"><title>Interactive dashboard (HTML): 8.5</title></circle>
+<circle cx="455.0" cy="79.0" r="4.5" fill="#8f95a0" stroke="#fff" stroke-width="2"><title>15 Nov · Kiro GPT 5.6: 8.1</title></circle>
+<circle cx="492.5" cy="79.0" r="4.5" fill="#8f95a0" stroke="#fff" stroke-width="2"><title>15 Nov · ChatGPT ToolnextIT: 8.4</title></circle>
+<path d="M325.6,70.0 L334.6,79.0 L325.6,88.0 L316.6,79.0 Z" fill="#f47230" stroke="#fff" stroke-width="2"><title>This review: 7.07</title></path>
+<text x="638" y="83.0" font-size="10.5" font-weight="800" fill="#191919">7.1</text>
+<text x="120" y="124.0" font-size="10.5" font-weight="700" fill="#191919" text-anchor="end">Dr Murat Üstün</text>
+<text x="120" y="136.0" font-size="8.5" fill="#666" text-anchor="end">earlier spread 6.5 to 8.2</text>
+<line x1="255.0" y1="125.0" x2="467.5" y2="125.0" stroke="#b8bcc4" stroke-width="2" stroke-linecap="round"/>
+<circle cx="380.0" cy="125.0" r="4.5" fill="#8f95a0" stroke="#fff" stroke-width="2"><title>8 Nov · Comparison of Surgical Propositions (PDF): 7.5</title></circle>
+<circle cx="342.5" cy="125.0" r="4.5" fill="#8f95a0" stroke="#fff" stroke-width="2"><title>8 Nov · Three Propositions Compared to Lee (HTML): 7.2</title></circle>
+<circle cx="255.0" cy="125.0" r="4.5" fill="#8f95a0" stroke="#fff" stroke-width="2"><title>15 Nov · Claude-Fable Rev2: 6.5</title></circle>
+<circle cx="355.0" cy="125.0" r="4.5" fill="#8f95a0" stroke="#fff" stroke-width="2"><title>15 Nov · Gemini report: 7.3</title></circle>
+<circle cx="417.5" cy="125.0" r="4.5" fill="#8f95a0" stroke="#fff" stroke-width="2"><title>Interactive dashboard (HTML): 7.8</title></circle>
+<circle cx="405.0" cy="125.0" r="4.5" fill="#8f95a0" stroke="#fff" stroke-width="2"><title>15 Nov · Kiro GPT 5.6: 7.7</title></circle>
+<circle cx="467.5" cy="125.0" r="4.5" fill="#8f95a0" stroke="#fff" stroke-width="2"><title>15 Nov · ChatGPT ToolnextIT: 8.2</title></circle>
+<path d="M258.1,116.0 L267.1,125.0 L258.1,134.0 L249.1,125.0 Z" fill="#00b894" stroke="#fff" stroke-width="2"><title>This review: 6.53</title></path>
+<text x="638" y="129.0" font-size="10.5" font-weight="800" fill="#191919">6.5</text>
+<text x="120" y="170.0" font-size="10.5" font-weight="700" fill="#191919" text-anchor="end">Dr Fakhrul Islam</text>
+<text x="120" y="182.0" font-size="8.5" fill="#666" text-anchor="end">earlier spread 6.4 to 8.3</text>
+<line x1="242.5" y1="171.0" x2="480.0" y2="171.0" stroke="#b8bcc4" stroke-width="2" stroke-linecap="round"/>
+<circle cx="267.5" cy="171.0" r="4.5" fill="#8f95a0" stroke="#fff" stroke-width="2"><title>8 Nov · Comparison of Surgical Propositions (PDF): 6.6</title></circle>
+<circle cx="242.5" cy="171.0" r="4.5" fill="#8f95a0" stroke="#fff" stroke-width="2"><title>8 Nov · Three Propositions Compared to Lee (HTML): 6.4</title></circle>
+<circle cx="242.5" cy="164.0" r="4.5" fill="#8f95a0" stroke="#fff" stroke-width="2"><title>15 Nov · Claude-Fable Rev2: 6.4</title></circle>
+<circle cx="480.0" cy="171.0" r="4.5" fill="#8f95a0" stroke="#fff" stroke-width="2"><title>15 Nov · Gemini report: 8.3</title></circle>
+<circle cx="405.0" cy="171.0" r="4.5" fill="#8f95a0" stroke="#fff" stroke-width="2"><title>Interactive dashboard (HTML): 7.7</title></circle>
+<circle cx="367.5" cy="171.0" r="4.5" fill="#8f95a0" stroke="#fff" stroke-width="2"><title>15 Nov · Kiro GPT 5.6: 7.4</title></circle>
+<circle cx="417.5" cy="171.0" r="4.5" fill="#8f95a0" stroke="#fff" stroke-width="2"><title>15 Nov · ChatGPT ToolnextIT: 7.8</title></circle>
+<path d="M332.5,162.0 L341.5,171.0 L332.5,180.0 L323.5,171.0 Z" fill="#f2a600" stroke="#fff" stroke-width="2"><title>This review: 7.12</title></path>
+<text x="638" y="175.0" font-size="10.5" font-weight="800" fill="#191919">7.1</text>
+<text x="638" y="9" font-size="8" fill="#666">this review</text>
+</svg>
+</div>
+<div style="height:8px"></div>
+<table class="tbl"><thead><tr><th>Earlier report</th><th style="background:#1757ac">Their order</th><th style="background:#00866c">What it got right</th><th style="background:#c62f30">What does not hold</th><th style="background:#4b5260">Verdict</th></tr></thead><tbody><tr><th style="width:17%">Comparison of Surgical Propositions · 8 Nov</th><td style="width:17%" class="tnum">Usama 7.9 · Üstün 7.5 · Lee 6.9 · Fakhrul 6.6</td><td style="width:24%">Resection and biopsy for a bled ulcer; limb lengths matter.</td><td style="width:30%">States H. pylori was positive after <i>two</i> courses (only one was tested). Calls the bile-only view "well supported". Lee's gallbladder shown as optional (since superseded). Üstün second on paper diligence.</td><td style="width:12%"><span class="verdict v-partly">Partly upheld</span></td></tr><tr><th style="width:17%">Three Propositions Compared to Lee · 8 Nov</th><td style="width:17%" class="tnum">Usama 7.5 · Üstün 7.2 · Fakhrul 6.4 · Lee not scored</td><td style="width:24%">Fair on GJ preservation: it has precedent, but not for a bleeding ulcer.</td><td style="width:30%">Lee left unscored, so it cannot rank him. Its gaps for Usama (pathology, PPI) and Lee (gallbladder) were filled after 8 Nov.</td><td style="width:12%"><span class="verdict v-superseded">Superseded</span></td></tr><tr><th style="width:17%">Claude-Fable Rev2 · 15 Nov</th><td style="width:17%" class="tnum">Lee 7.8 · Usama 6.9 · Üstün 6.5 · Fakhrul 6.4</td><td style="width:24%">Careful quotations, evidence caveats, the biopsy gap, limb arithmetic and the questions list.</td><td style="width:30%">Put 25% of its weight on experience and practicality. Gave Lee 8.0 for ulcer healing and 9.0 for safety (vs Usama 6.0). Read Lee's ambiguous PPI wording one way.</td><td style="width:12%"><span class="verdict v-rejected">Ranking rejected</span></td></tr><tr><th style="width:17%">Gemini report · 15 Nov</th><td style="width:17%" class="tnum">Lee 9.0 · Usama 8.9 · Fakhrul 8.3 · Üstün 7.3</td><td style="width:24%">Explains why a 50 to 60 cm bile limb needs the join rebuilt; vagotomy is easy during hernia repair.</td><td style="width:30%">Score inflation; "zero" vagotomy diarrhoea; perforation risk if deferred; Dr Shah's "endorsement" scored; an invented 9.3 pathway; iron and cold-sensitivity overclaims.</td><td style="width:12%"><span class="verdict v-rejected">Rejected</span></td></tr><tr><th style="width:17%">Interactive dashboard (HTML)</th><td style="width:17%" class="tnum">Lee 9.1 · Usama 8.5 · Üstün 7.8 · Fakhrul 7.7</td><td style="width:24%">Lets weights be tested interactively.</td><td style="width:30%">Same claims as the Gemini report; "0% leak rate" taken as fact; "guaranteeing zero bile reflux"; ranks Fakhrul last while calling his geometry the best.</td><td style="width:12%"><span class="verdict v-rejected">Rejected</span></td></tr><tr><th style="width:17%">Kiro GPT 5.6 · 15 Nov</th><td style="width:17%" class="tnum">Usama 81 · Üstün 77 · Fakhrul 74 · Lee 62</td><td style="width:24%">The best list of gaps: no post-bleed endoscopy, phosphate after the iron infusions, Hill IV is not hernia size, histology is not a cure test, medication discrepancies.</td><td style="width:30%">Merges operative risk with follow-up paperwork (Lee 6/15 vs Üstün 14/15). Puts Üstün second despite an undefined operation.</td><td style="width:12%"><span class="verdict v-partly">Partly upheld</span></td></tr><tr><th style="width:17%">ChatGPT ToolnextIT · 15 Nov</th><td style="width:17%" class="tnum">Usama 8.4 · Üstün 8.2 · Fakhrul 7.8 · Lee 6.8</td><td style="width:24%">Technically precise on bile-limb arithmetic, H. pylori testing, PPI duration and symptom-only follow-up.</td><td style="width:30%">Scores Üstün's nutrition 14/15 (equal to Fakhrul) with no limb lengths given. Üstün second on safety paperwork.</td><td style="width:12%"><span class="verdict v-partly">Partly upheld</span></td></tr></tbody></table>
+
+<!-- ========== PAGE 7: CLAIMS ========== -->
+<div class="page-break"></div>
+<div class="sec"><span class="num">5</span><h2>Twelve claims in the earlier reports that do not hold up</h2></div>
+<ol class="claims">
+  <li><span class="claim">"Permanently shuts off acid via Truncal Vagotomy" and "carries zero risk of 'post-vagotomy diarrhoea' because your bypass anatomy has no pyloric valve to stagnate".</span> <span class="src">Gemini report; dashboard</span><br>
+  A vagotomy lowers acid; it does not shut it off. It is usually less complete than the vonoprazan that had already failed to heal the ulcer. Your remnant stomach keeps its pylorus. Post-vagotomy bowel upset also comes from denervating the gut and the biliary tree, not only from drainage procedures. Published salvage series report dysphagia and aspiration after vagotomy, and they report diarrhoea too sparsely to support "zero".</li>
+  <li><span class="claim">"Re-entering a scarred hiatus later to perform a redo vagotomy carries a high risk of oesophageal perforation".</span> <span class="src">Gemini report</span><br>
+  Salvage vagotomy for marginal ulcer is commonly done <b>thoracoscopically, through the chest</b>, well away from a repaired hiatus. The 2019 comparison and later robotic series used this route. Keeping vagotomy in reserve is a realistic option.</li>
+  <li><span class="claim">"Endorsed by Dr. Shashank Shah", scored as "High-Level Peer Endorsement", and a "9.3 / 10 Combined Score" pathway.</span> <span class="src">Gemini report</span><br>
+  The only evidence is your own sentence in a question to Dr Fakhrul. The files contain nothing written by Dr Shah. The 9.3 combines two people's views; nobody proposed it.</li>
+  <li><span class="claim">"Near-Zero Leak Risk", "0% leak rate" and "0% complications" treated as established.</span> <span class="src">Gemini; dashboard; partly Claude-Fable</span><br>
+  Both ~30-case "no complication" figures are self-reported, with no definitions, denominators or follow-up period. Prof. Lee's operation still has staple lines: the divided afferent limb, 2 cm from the ulcerated join, and the new bowel join. It also has a hiatal dissection, a vagotomy and a cholecystectomy.</li>
+  <li><span class="claim">"Prof. Lee advises no post-operative PPI" against "PPI until the ulcer heals".</span> <span class="src">Gemini and dashboard against Claude-Fable</span><br>
+  His emails say both: "No specific medication after surgery is needed", "You should not stop PPI before TV and ulcer healing", then "I mean PPI". Neither reading is established. It must be settled in writing.</li>
+  <li><span class="claim">"H. pylori persistently positive after two eradication courses."</span> <span class="src">8 November comparison</span><br>
+  The urease test was positive after the first course only. The second course (levofloxacin with amoxicillin) has never been tested.</li>
+  <li><span class="claim">"Reclaims ~95 cm of proximal jejunum to restore iron absorption and address your cold sensitivity"; "guaranteeing zero bile reflux".</span> <span class="src">Gemini; dashboard</span><br>
+  The duodenum, the main site of iron absorption, stays bypassed in every plan. Returning ~95 cm of jejunum to the food stream helps, but modestly. Cold sensitivity has other candidate causes, including empty iron stores themselves and the thyroid; Dr Usama has asked for a TSH test. No plan guarantees zero reflux.</li>
+  <li><span class="claim">Istanbul ranked second (77/100, 8.2/10, 7.5/10), with nutrition scored equal to Dr Fakhrul's (14/15).</span> <span class="src">Kiro GPT 5.6; ChatGPT ToolnextIT; 8 November comparison</span><br>
+  These scores reward a careful letter signed by a coordination team. The operation, the limb lengths and the surgeon's own numbers all remain undefined. A nutrition score cannot equal Dr Fakhrul's when no limb lengths were given.</li>
+  <li><span class="claim">Prof. Lee given 8.0 to 9.5 for ulcer healing because his plan "deals with both acid and bile".</span> <span class="src">Claude-Fable; Gemini; dashboard</span><br>
+  The ulcer stays in place and is never sampled. H. pylori is set aside. The acid step is weaker than drug treatment the ulcer already failed on. The external suturing technique has no published series for a bleeding ulcer; Dr Fakhrul says neither he nor his colleagues have heard of it.</li>
+  <li><span class="claim">Prof. Lee given 9.0 to 9.8 for operative safety (Claude-Fable: 9.0 against 6.0 for Dr Usama).</span> <span class="src">Claude-Fable; Gemini</span><br>
+  He is safer on the day, but the gap is overstated. His plan has no drain, 1 to 2 days in hospital and a flight within a week, for an international patient. In the small 2019 comparison, 13 rebuilt joins had 1 leak and 2 narrowings, a real but modest excess.</li>
+  <li><span class="claim">Dr Fakhrul's design "requires two new anastomoses (new GJ + reconfigured JJ)".</span> <span class="src">Gemini</span><br>
+  Shortening the bile limb means taking down the old join on the ulcerated jejunum, which needs a closure or a segment resection: likely three bowel joins or closures, not two. Nor has Dr Usama said he will shorten the limb; that remains the open question.</li>
+  <li><span class="claim">"Hill grade IV (severe)" read as a severe hiatal hernia.</span> <span class="src">8 November comparison; Gemini ("Grade IV hiatal hernia")</span><br>
+  The Hill grade describes the valve at the top of the stomach, not the size of the hernia. Kiro GPT made this point correctly. Repairing it during a conversion is still advisable.</li>
+</ol>
+<div class="grid2" style="margin-top:8px">
+  <div class="box-teal avoid">
+    <h3 style="color:#00664f">What the earlier reports got right, kept here</h3>
+    <ul class="kept">
+      <li>No endoscopy has been done since the 9 September bleed (Kiro GPT).</li>
+      <li>Check phosphate after two ferric carboxymaltose infusions (Kiro GPT).</li>
+      <li>Histology of a resected join is not a test of H. pylori cure (Kiro GPT; ChatGPT).</li>
+      <li>A 50 to 60 cm bile limb is impossible if the old join is kept (ChatGPT; Gemini).</li>
+      <li>Biopsy is the largest gap in Prof. Lee's plan; ask for 60 cm and a longer stay (Claude-Fable).</li>
+      <li>"Obsolete" and "most important" both overstate vagotomy (Claude-Fable; Kiro GPT).</li>
+    </ul>
+  </div>
+  <div class="box-amber avoid">
+    <h3 style="color:#8a5300">Points the 8 November reports could not know</h3>
+    <ul class="kept">
+      <li>On 7 November Prof. Lee agreed to remove the gallbladder (<span class="q">"Yes, I would suggest to remove it"</span>). The 8 November reports still list it as optional.</li>
+      <li>On 14 November Dr Usama added histopathology, six months of PPI and confirmed hernia repair and mesenteric closure.</li>
+      <li>Dr Fakhrul's follow-up answers added PPI, H. pylori eradication and lifelong vitamins.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ========== PAGE 8: ANATOMY & MECHANISM ========== -->
+<div class="sec"><span class="num">6</span><h2>Two questions behind the scores</h2></div>
+<div class="figure">
+  <div class="ftitle">How much bowel would food travel without bile? (bile limb + food limb, cm)</div>
+  <div class="fsub">Ranges follow each surgeon's written figures. Dr Usama and Dr Üstün gave none, so two scenarios are shown. The dashed line marks today's 155 cm. The 2024 expert consensus asks surgeons to measure the whole bowel and keep at least 300 to 400 cm of common channel.</div>
+  <svg viewBox="0 0 700 208" width="100%" role="img" aria-label="Bypassed bowel length by plan">
+<line x1="250.0" y1="8" x2="250.0" y2="178" stroke="#e7e7e7"/>
+<text x="250.0" y="192" font-size="9" fill="#666" text-anchor="middle">0</text>
+<line x1="309.4" y1="8" x2="309.4" y2="178" stroke="#e7e7e7"/>
+<text x="309.4" y="192" font-size="9" fill="#666" text-anchor="middle">50</text>
+<line x1="368.8" y1="8" x2="368.8" y2="178" stroke="#e7e7e7"/>
+<text x="368.8" y="192" font-size="9" fill="#666" text-anchor="middle">100</text>
+<line x1="428.1" y1="8" x2="428.1" y2="178" stroke="#e7e7e7"/>
+<text x="428.1" y="192" font-size="9" fill="#666" text-anchor="middle">150</text>
+<line x1="487.5" y1="8" x2="487.5" y2="178" stroke="#e7e7e7"/>
+<text x="487.5" y="192" font-size="9" fill="#666" text-anchor="middle">200</text>
+<line x1="546.9" y1="8" x2="546.9" y2="178" stroke="#e7e7e7"/>
+<text x="546.9" y="192" font-size="9" fill="#666" text-anchor="middle">250</text>
+<line x1="606.2" y1="8" x2="606.2" y2="178" stroke="#e7e7e7"/>
+<text x="606.2" y="192" font-size="9" fill="#666" text-anchor="middle">300</text>
+<text x="440.0" y="205" font-size="9" fill="#666" text-anchor="middle">centimetres of small bowel travelled by food without bile</text>
+<text x="240" y="24.0" font-size="10" font-weight="700" fill="#191919" text-anchor="end">Today: 2017 OAGB</text>
+<text x="240" y="35.0" font-size="8.3" fill="#666" text-anchor="end">bile limb 155 cm, no food limb</text>
+<rect x="250" y="18.0" width="184.1" height="14" fill="#5f6672" rx="0"/>
+<text x="440.1" y="29.0" font-size="10" font-weight="800" fill="#191919">155</text>
+<text x="240" y="58.0" font-size="10" font-weight="700" fill="#191919" text-anchor="end">Prof. Lee</text>
+<text x="240" y="69.0" font-size="8.3" fill="#666" text-anchor="end">keep ~150 cm + food limb 40 to 60 cm</text>
+<rect x="250" y="52.0" width="225.6" height="14" fill="#257de0" rx="0"/>
+<rect x="477.6" y="52.0" width="27.7" height="14" fill="#257de0" opacity="0.45" rx="4"/>
+<text x="511.3" y="63.0" font-size="10" font-weight="800" fill="#191919">190 to 215</text>
+<text x="240" y="92.0" font-size="10" font-weight="700" fill="#191919" text-anchor="end">Dr Fakhrul</text>
+<text x="240" y="103.0" font-size="8.3" fill="#666" text-anchor="end">bile limb 50 to 60 + food limb 75 cm</text>
+<rect x="250" y="86.0" width="148.4" height="14" fill="#f2a600" rx="0"/>
+<rect x="400.4" y="86.0" width="9.9" height="14" fill="#f2a600" opacity="0.45" rx="4"/>
+<text x="440.1" y="97.0" font-size="10" font-weight="800" fill="#191919">125 to 135</text>
+<text x="240" y="126.0" font-size="10" font-weight="700" fill="#191919" text-anchor="end">Dr Usama or Dr Üstün: scenario A</text>
+<text x="240" y="137.0" font-size="8.3" fill="#666" text-anchor="end">keep 155 cm + &quot;standard&quot; food limb 75 to 150</text>
+<rect x="250" y="120.0" width="273.1" height="14" fill="#9aa0aa" rx="0"/>
+<rect x="525.1" y="120.0" width="87.1" height="14" fill="#9aa0aa" opacity="0.45" rx="4"/>
+<text x="618.2" y="131.0" font-size="10" font-weight="800" fill="#191919">230 to 305</text>
+<text x="240" y="160.0" font-size="10" font-weight="700" fill="#191919" text-anchor="end">Dr Usama or Dr Üstün: scenario B</text>
+<text x="240" y="171.0" font-size="8.3" fill="#666" text-anchor="end">built to Dr Fakhrul&#x27;s lengths</text>
+<rect x="250" y="154.0" width="148.4" height="14" fill="#9aa0aa" rx="0"/>
+<rect x="400.4" y="154.0" width="9.9" height="14" fill="#9aa0aa" opacity="0.45" rx="4"/>
+<text x="440.1" y="165.0" font-size="10" font-weight="800" fill="#191919">125 to 135</text>
+<line x1="434.1" y1="6" x2="434.1" y2="178" stroke="#c62f30" stroke-width="1.5" stroke-dasharray="4 3"/>
+<line x1="250" y1="8" x2="250" y2="178" stroke="#c2c2c2"/>
+</svg>
+</div>
+<div class="grid2" style="margin-top:10px">
+  <div class="box-blue avoid">
+    <h3 style="color:#0e3d7e">What a vagotomy can and cannot do here</h3>
+    <ul class="tight">
+      <li><b>Can:</b> lower acid made by the pouch for life, and so reduce reliance on tablets. It is technically easy during a hiatal hernia repair.</li>
+      <li><b>Cannot:</b> remove bile or H. pylori, or heal a scarred ulcer bed on its own. It is weaker than vonoprazan, which did not heal this ulcer in 12 weeks.</li>
+      <li><b>Cost:</b> it is permanent. There are few data on long-term bowel effects in bypass patients. Highly selective vagotomy is unsafe here, as Prof. Lee rightly says, because the pouch depends on lesser-curve blood vessels.</li>
+      <li><b>Fair reading:</b> neither "obsolete" nor "most important". It is a reasonable <em>reserve</em> step, which can be done later through the chest if an ulcer returns despite PPI and a confirmed H. pylori cure.</li>
+    </ul>
+  </div>
+  <div class="box-rose avoid">
+    <h3 style="color:#a02526">Keep the ulcerated join, or cut it out?</h3>
+    <ul class="tight">
+      <li><b>Keeping it</b> (Prof. Lee) avoids the step most prone to leaks and narrowing, and makes the operation shorter. But the ulcer that bled stays in place, unsampled, until it heals, and nobody will check it unless you ask.</li>
+      <li><b>Removing it</b> (Dr Usama, Dr Fakhrul) takes away the bleeding source at once and gives the pathologist tissue. It allows a fresh, well-supplied join and, if the surgeon chooses, a shorter bile limb. The price is a new join in revisional tissue.</li>
+      <li><b>What would tip it:</b> a fresh endoscopy. If the ulcer has healed on dexlansoprazole and sucralfate and the join looks healthy, keeping it becomes more defensible. If it is still deep or scarred, removal is the clearer choice.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ========== PAGE 9: NEXT STEPS ========== -->
+<div class="avoid">
+<div class="sec"><span class="num">7</span><h2>What would move the scores, and what to do next</h2></div>
+<p class="lede-block" style="margin-left:0">These are not current scores. They show what written answers would be worth on your scale. Dr Fakhrul's design reaches the operating table only through another surgeon, so the first card is in effect his plan too.</p><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px"><div class="ask" style="border-top-color:#f47230"><h4>Dr Usama, built to Dr Fakhrul&#x27;s design</h4><svg viewBox="0 0 210 46" width="100%"><rect x="10" y="8" width="120.1" height="11" fill="#f47230" opacity="0.45" rx="3"/><text x="135.1" y="17" font-size="10" fill="#191919">now 7.1</text><rect x="10" y="26" width="132.4" height="11" fill="#f47230" rx="3"/><text x="147.4" y="35" font-size="10" font-weight="800" fill="#191919">7.8</text></svg><p style="font-size:8.4pt;margin:2px 0 0;color:#444">Confirms in writing: bile limb 50 to 60 cm and food limb ~75 cm; H. pylori test of cure whatever the histology; an endoscopy at ~3 months before PPI stops; an iron and vitamin plan. Safety dips a little for the longer reconstruction.</p></div><div class="ask" style="border-top-color:#00b894"><h4>Dr Üstün, after a real consultation</h4><svg viewBox="0 0 210 46" width="100%"><rect x="10" y="8" width="110.9" height="11" fill="#00b894" opacity="0.45" rx="3"/><text x="125.9" y="17" font-size="10" fill="#191919">now 6.5</text><rect x="10" y="26" width="128.9" height="11" fill="#00b894" rx="3"/><text x="143.9" y="35" font-size="10" font-weight="800" fill="#191919">7.6</text></svg><p style="font-size:8.4pt;margin:2px 0 0;color:#444">He commits to resecting an active ulcer, states short limb lengths, discloses his own conversion numbers, and confirms the hernia repair, gallbladder and mesenteric closure.</p></div><div class="ask" style="border-top-color:#257de0"><h4>Prof. Lee, with six additions</h4><svg viewBox="0 0 210 46" width="100%"><rect x="10" y="8" width="108.4" height="11" fill="#257de0" opacity="0.45" rx="3"/><text x="123.4" y="17" font-size="10" fill="#191919">now 6.4</text><rect x="10" y="26" width="119.4" height="11" fill="#257de0" rx="3"/><text x="134.4" y="35" font-size="10" font-weight="800" fill="#191919">7.0</text></svg><p style="font-size:8.4pt;margin:2px 0 0;color:#444">Pre-op biopsy; a 60 cm food limb; a written plan B to resect if the ulcer has not healed; PPI until healing is confirmed; H. pylori test and treatment; a 10 to 14 day stay. The ulcer still stays in place and the bypass gets longer.</p></div></div>
+</div>
+<div class="box-teal avoid" style="margin-top:10px">
+  <h3 style="color:#00664f">Five things any plan needs before you book</h3>
+  <ol class="steps">
+    <li><b>A fresh upper endoscopy with biopsies</b> of the ulcer edge and pouch, taken <b>while you stay on acid suppression</b>. It shows whether the ulcer has healed since September, rules out malignancy and gives H. pylori histology.</li>
+    <li><b>An H. pylori test of cure</b> planned by a gastroenterologist, <b>without an unsupervised PPI stop</b>. If you are still positive, use susceptibility-guided rescue treatment chosen with your 2025 C. difficile colitis in mind.</li>
+    <li><b>Up-to-date bloods:</b> ferritin and transferrin saturation after the October infusions; phosphate (ferric carboxymaltose can lower it); vitamin D (18.1 in February 2025); B12, folate, TSH and albumin.</li>
+    <li><b>A written, drawn limb plan:</b> measured total bowel, bile limb, food limb and common channel, with what will happen to the old join.</li>
+    <li><b>Written aftercare:</b> PPI duration; an endoscopy at about three months before PPI is stopped; lifelong bariatric vitamins with iron monitoring; and a named follow-up doctor in Bangladesh who receives the operation note.</li>
+  </ol>
+</div>
+<div class="grid2" style="margin-top:10px">
+  <div class="ask" style="border-top-color:#f47230">
+    <h4>Dr Usama Iqbal: take these to the teleconsultation</h4>
+    <ol>
+      <li>Will you build Dr Fakhrul's lengths (bile limb 50 to 60 cm, food limb ~75 cm)? If you keep the 155 cm bile limb, what food limb will you use?</li>
+      <li>How many OAGB-to-Roux-en-Y conversions with resection of the join have you done yourself, and with what leaks and narrowings?</li>
+      <li>Will you trim the pouch?</li>
+      <li>Will you confirm H. pylori cure whatever the histology shows?</li>
+      <li>Will you do an endoscopy at about 3 months before PPI is stopped?</li>
+      <li>Does the PKR estimate cover all three procedures in one operation?</li>
+      <li>Will you send a brief written summary after the call?</li>
+    </ol>
+  </div>
+  <div class="ask" style="border-top-color:#257de0">
+    <h4>Prof. Wei-Jei Lee: before considering his plan</h4>
+    <ol>
+      <li>Will you take biopsies before the operation (on the admission Monday)?</li>
+      <li>Will you use a 60 cm food limb, written into the operation note?</li>
+      <li>Plan B in writing: will you resect the join if it is deep, scarred or suspicious at operation, or not healed at 3 months?</li>
+      <li>Will you continue PPI until an endoscopy shows healing?</li>
+      <li>Will you test and treat H. pylori?</li>
+      <li>Why lengthen the bypass, when the iron deficiency predates the bleed?</li>
+      <li>Can the stay be 10 to 14 days, and what does complication care cost?</li>
+    </ol>
+  </div>
+  <div class="ask" style="border-top-color:#00b894">
+    <h4>Istanbul: only after speaking to Dr Üstün himself</h4>
+    <ol>
+      <li>Will he resect the join if the ulcer is still active?</li>
+      <li>What limb lengths does he intend?</li>
+      <li>What are his own OAGB conversion numbers and outcomes?</li>
+      <li>Which hospital will he operate in, in writing? Public listings differ.</li>
+      <li>Will he close the mesenteric defects?</li>
+      <li>What does the package cover if the stay extends?</li>
+    </ol>
+  </div>
+  <div class="ask" style="border-top-color:#f2a600">
+    <h4>Dr Fakhrul Islam: use him as your reviewer</h4>
+    <ol>
+      <li>Would he review the final written plan of the surgeon you choose?</li>
+      <li>Which surgeon or centre within reach (other than the USA) builds his design routinely?</li>
+      <li>Does he agree with a reserve vagotomy if an ulcer returns despite PPI and a confirmed H. pylori cure?</li>
+    </ol>
+  </div>
+</div>
+
+<!-- ========== PAGE 10: METHOD & SOURCES ========== -->
+<div class="avoid">
+<div class="sec"><span class="num">8</span><h2>Method, sources and limits</h2></div>
+<div class="grid2">
+  <div class="card avoid">
+    <h3 style="color:#0e3d7e">How the scores were made</h3>
+    <ul class="tight">
+      <li>Each proposition was scored 0 to 10 on each of your eight criteria and weighted as you set them (25, 10, 20, 15, 10, 10, 7 and 3%).</li>
+      <li>A score rates the <b>written proposition</b>, with any surgeon-specific facts in the emails. Self-reported results were given limited weight because none is audited.</li>
+      <li>"Not stated" was scored as a gap, not as a failure. A call may have covered it, but nothing in writing shows that.</li>
+      <li>Dr Fakhrul's design was scored as a proposition. His lack of an operating team is reflected in operative safety and completeness. A "bookable only" ranking puts Dr Usama first, Dr Üstün second and Prof. Lee third.</li>
+      <li>Criterion 8 was checked against public profiles on 25 November 2026. Prof. Lee is a past president of the IFSO Asia-Pacific Chapter. Dr Üstün practises in Istanbul and London. Dr Fakhrul's credentials are as stated in his file. No public profile of Dr Usama's training was found, so his score rests on the emails.</li>
+    </ul>
+  </div>
+  <div class="card avoid">
+    <h3 style="color:#0e3d7e">Limits</h3>
+    <ul class="tight">
+      <li>Endoscopy images, operative findings and pathology were not available.</li>
+      <li>The literature is small and retrospective. No study compares these four operations in a patient like you.</li>
+      <li>Literature figures are taken from the cited papers' abstracts, as also used in the earlier reports. They were spot-checked, not fully re-read.</li>
+      <li>Records to reconcile: the second iron infusion is dated 17 October in one email and 25 October in another. The dexlansoprazole dose is described differently in different letters.</li>
+      <li>A difference of 0.3 points or less should not decide anything.</li>
+    </ul>
+  </div>
+</div>
+</div>
+<div class="card avoid" style="margin-top:10px">
+  <h3 style="color:#0e3d7e">Sources</h3>
+  <p style="font-size:8.2pt;margin-bottom:4px"><b>Correspondence (latest files):</b> Emails Prof. Wei-Jei Lee (4 to 7 Nov 2026); Emails with Dr Usama Iqbal, Aga Khan University Hospital (12 Oct to 14 Nov 2026); Emails Istanbul Bariatric Center Team (12 to 16 Oct 2026); Opinion of Dr Fakhrul Islam (with follow-up Q&amp;A and adviser note).</p>
+  <p style="font-size:8.2pt;margin-bottom:6px"><b>Earlier comparisons challenged:</b> Comparison_of_Surgical_Propositions.pdf (8 Nov); Three_Propositions_Compared_to_Lee.html (8 Nov); OAGB_Revision_Four_Propositions_Compared_Rev2 Claude-Fable (15 Nov); Comparative Proposition Analysis Report, Gemini (15 Nov); comparative_proposition_evaluation_dashboard.html; OAGB Revisional Surgery Decision Analysis, Kiro GPT 5.6 (15 Nov); OAGB_Revision_Updated_Comparison, ChatGPT ToolnextIT (15 Nov).</p>
+  <ol class="refs">
+    <li>Bonanno AM, Tieu B, Husain F. Thoracoscopic truncal vagotomy versus surgical revision of the gastrojejunal anastomosis for recalcitrant marginal ulcers. Surg Endosc 2019;33:607–611. (20 patients; recurrence 1/7 vs 2/13; revision group: 1 leak, 2 strictures.)</li>
+    <li>Kermansaravi M, et al. Revision/conversion surgeries after one anastomosis gastric bypass: an experts' modified Delphi consensus. Obes Surg 2024;34:2399–2410.</li>
+    <li>Sargsyan N, et al. Outcomes of OAGB conversion to RYGB: systematic review and meta-analysis. Obes Surg 2024;34:976–984.</li>
+    <li>Voon K, Huang CK, et al. Conversion of OAGB to RYGB for late complications. J Metab Bariatr Surg 2021;10:32–41.</li>
+    <li>Facchiano E, et al. Laparoscopic conversion of OAGB to RYGB for chronic bile reflux. Obes Surg 2016 (video report).</li>
+    <li>Clapp B, et al. Truncal vagotomy and gastrojejunostomy revision for marginal ulcer. Surg Laparosc Endosc Percutan Tech 2025.</li>
+    <li>Vosburg RW, et al. ASMBS literature reviews on marginal ulcer risk factors and treatment. Surg Obes Relat Dis 2025;21.</li>
+    <li>Chey WD, et al. ACG Clinical Guideline: Treatment of Helicobacter pylori infection. 2024.</li>
+    <li>Lee WJ, et al. Revisional surgery for laparoscopic minigastric bypass. Surg Obes Relat Dis 2011;7:486–491.</li>
+    <li>Public profiles checked 25 Nov 2026: IFSO faculty profile of Prof. Wei-Jei Lee (ifso.com); Istanbul Bariatric Center and Bookimed listings for Dr Murat Üstün.</li>
+  </ol>
+</div>
+<div class="signoff">Prepared by Claude (Anthropic) · 25 November 2026 · Decision support for discussion with your surgeons, not medical advice.</div>
+
+</body>
+</html>
