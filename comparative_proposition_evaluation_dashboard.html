@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Comparative Analysis: Dr. Lee, Dr. Fakhrul Islam, Dr. Usama Iqbal &amp; Dr. Murat Üstün</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap');
+    body { font-family: 'Inter', sans-serif; }
+    .serif-heading { font-family: 'Merriweather', serif; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen">
+
+  <!-- Top Header -->
+  <header class="bg-slate-900 text-white border-b border-slate-800 sticky top-0 z-30">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div>
+        <span class="text-xs font-semibold uppercase tracking-widest text-amber-400 block">Revisional OAGB Surgical Decision Matrix (Extracted from Uploaded Records)</span>
+        <h1 class="text-xl sm:text-2xl font-bold serif-heading mt-0.5">Dr. W-J Lee vs. Dr. Usama Iqbal vs. Dr. Fakhrul Islam vs. Dr. Murat Üstün</h1>
+      </div>
+      <div class="flex items-center gap-3">
+        <button onclick="resetToDefaults()" class="px-3.5 py-2 text-xs font-medium bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg border border-slate-700 transition">
+          Reset Default Scores
+        </button>
+        <button onclick="window.print()" class="px-4 py-2 text-xs font-semibold bg-amber-500 hover:bg-amber-400 text-slate-950 rounded-lg transition">
+          Print View
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+
+    <!-- Patient Context Banner -->
+    <section class="bg-blue-950 text-blue-50 p-5 rounded-xl border border-blue-800 flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div class="text-sm leading-relaxed space-y-1">
+        <div class="text-xs font-bold uppercase tracking-wider text-amber-400">Patient Baseline Profile — M. Mohsin Chowdhury (59M, BMI ~26–27 kg/m²)</div>
+        <p><strong>Primary Pathology:</strong> 2017 OAGB (155 cm BP limb) complicated by large chronic marginal ulcer (Sept 2026 syncopal GI bleed, Hb 8.2 g/dL, 9 days after stopping vonoprazan), severe bile reflux, Hill Grade IV hiatal hernia, multiple 5–6 mm gallstones, persistent <em>H. pylori</em>, and recurrent iron-deficiency anaemia (ferritin 4.55 → 11.2 ng/mL with cold sensitivity at 28°C).</p>
+      </div>
+    </section>
+
+    <!-- Live Scoreboard Cards (4 Specialists) -->
+    <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+      <!-- Dr. Wei-Jei Lee -->
+      <div class="bg-white rounded-xl border-2 border-blue-600 p-5 flex flex-col justify-between">
+        <div>
+          <div class="flex items-start justify-between border-b border-slate-100 pb-3 mb-3">
+            <div>
+              <span class="text-xs font-bold uppercase tracking-wider text-blue-700 bg-blue-50 px-2 py-0.5 rounded">Taiwan • OAGB Pioneer</span>
+              <h2 class="text-base font-bold text-slate-900 mt-1.5">Dr. Wei-Jei Lee</h2>
+            </div>
+            <div class="text-right">
+              <div class="text-3xl font-extrabold text-blue-700" id="total-lee">9.1</div>
+              <div class="text-[11px] text-slate-500">out of 10.0</div>
+            </div>
+          </div>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            <strong>Plan:</strong> Keep original GJ anastomosis + 360° circumferential suture + <strong>Truncal Vagotomy</strong> + divide afferent loop for 40–60 cm Roux limb (keep 150 cm BP limb) + Hiatal Hernia repair + Cholecystectomy. Do NOT stop PPI pre-op.
+          </p>
+        </div>
+        <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+          <span class="text-slate-500">Cost: ~$10,000 USD</span>
+          <span id="rank-lee" class="font-bold text-blue-700">Ranked #1</span>
+        </div>
+      </div>
+
+      <!-- Dr. Usama Iqbal -->
+      <div class="bg-white rounded-xl border border-slate-200 p-5 flex flex-col justify-between">
+        <div>
+          <div class="flex items-start justify-between border-b border-slate-100 pb-3 mb-3">
+            <div>
+              <span class="text-xs font-bold uppercase tracking-wider text-purple-700 bg-purple-50 px-2 py-0.5 rounded">AKUH • Karachi</span>
+              <h2 class="text-base font-bold text-slate-900 mt-1.5">Dr. Usama Iqbal</h2>
+            </div>
+            <div class="text-right">
+              <div class="text-3xl font-extrabold text-purple-700" id="total-usama">8.5</div>
+              <div class="text-[11px] text-slate-500">out of 10.0</div>
+            </div>
+          </div>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            <strong>Plan:</strong> <strong>Resect ulcerated GJ anastomosis</strong> &amp; build new GJ (Medtronic Tri-Staple USA) + standard RYGB conversion + simultaneous Hiatal Hernia repair + mandatory Cholecystectomy. No vagotomy (attributes ulcer to bile &amp; ischemia).
+          </p>
+        </div>
+        <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+          <span class="text-slate-500">Cost: ~$5.4k–$7.3k USD</span>
+          <span id="rank-usama" class="font-bold text-purple-700">Ranked #2</span>
+        </div>
+      </div>
+
+      <!-- Dr. Murat Üstün -->
+      <div class="bg-white rounded-xl border border-slate-200 p-5 flex flex-col justify-between">
+        <div>
+          <div class="flex items-start justify-between border-b border-slate-100 pb-3 mb-3">
+            <div>
+              <span class="text-xs font-bold uppercase tracking-wider text-amber-700 bg-amber-50 px-2 py-0.5 rounded">IBC • Liv Hospital Istanbul</span>
+              <h2 class="text-base font-bold text-slate-900 mt-1.5">Dr. Murat Üstün</h2>
+            </div>
+            <div class="text-right">
+              <div class="text-3xl font-extrabold text-amber-700" id="total-murat">7.8</div>
+              <div class="text-[11px] text-slate-500">out of 10.0</div>
+            </div>
+          </div>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            <strong>Plan:</strong> Convert to RYGB (or reversal) + local revision/resection of GJ if required. Treats Hiatal Hernia (+£1,000) &amp; Cholecystectomy (+£1,000) as conditional add-ons. Very thorough pre-op medication, cardiac &amp; hypersomnia review.
+          </p>
+        </div>
+        <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+          <span class="text-slate-500">Cost: £7,350 (~$9.9k)</span>
+          <span id="rank-murat" class="font-bold text-amber-700">Ranked #3</span>
+        </div>
+      </div>
+
+      <!-- Dr. Fakhrul Islam -->
+      <div class="bg-white rounded-xl border border-slate-200 p-5 flex flex-col justify-between">
+        <div>
+          <div class="flex items-start justify-between border-b border-slate-100 pb-3 mb-3">
+            <div>
+              <span class="text-xs font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">Advisory Opinion</span>
+              <h2 class="text-base font-bold text-slate-900 mt-1.5">Dr. Fakhrul Islam</h2>
+            </div>
+            <div class="text-right">
+              <div class="text-3xl font-extrabold text-emerald-700" id="total-fakhrul">7.7</div>
+              <div class="text-[11px] text-slate-500">out of 10.0</div>
+            </div>
+          </div>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            <strong>Plan:</strong> Refashion new RYGB anastomosis with <strong>shortened 50–60 cm BP limb + 75 cm Alimentary limb</strong> (protects BMI 27 &amp; iron). Strictly <strong>opposes vagotomy</strong>. Mandatory gallbladder removal; views hiatal hernia repair as optional. Refers to USA.
+          </p>
+        </div>
+        <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+          <span class="text-slate-500">Refers to USA Centers</span>
+          <span id="rank-fakhrul" class="font-bold text-emerald-700">Ranked #4</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Multi-Criteria Scoring Engine (Out of 10) -->
+    <section class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+      <div class="p-6 border-b border-slate-200 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+        <div>
+          <h2 class="text-lg font-bold text-slate-900 serif-heading">Interactive Depth-of-Study Scoring Matrix (Out of 10)</h2>
+          <p class="text-xs text-slate-500 mt-0.5">Pre-loaded with clinical evidence scores. Adjust any slider to test different weightings.</p>
+        </div>
+        <span class="text-xs font-medium text-slate-600 bg-slate-100 px-3 py-1.5 rounded-full">5 Clinical Dimensions (20% each)</span>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse">
+          <thead>
+            <tr class="bg-slate-900 text-white text-xs uppercase tracking-wider">
+              <th class="p-4 w-1/4">Evaluation Criterion</th>
+              <th class="p-4 w-[18.75%]">Dr. W-J Lee</th>
+              <th class="p-4 w-[18.75%]">Dr. Usama Iqbal</th>
+              <th class="p-4 w-[18.75%]">Dr. Murat Üstün</th>
+              <th class="p-4 w-[18.75%]">Dr. Fakhrul Islam</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-200 text-sm" id="rubric-body">
+            <!-- Populated by JS -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Detailed Pros & Cons Grid -->
+    <section class="space-y-4">
+      <div>
+        <h2 class="text-lg font-bold text-slate-900 serif-heading">Detailed Pros &amp; Cons of Each Proposition</h2>
+        <p class="text-xs text-slate-500">Extracted directly from the email correspondence and analyzed against revisional bariatric surgery literature.</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <!-- Dr. Lee -->
+        <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+          <div class="bg-blue-900 text-white px-5 py-3 font-semibold text-sm flex justify-between items-center">
+            <span>1. Dr. Wei-Jei Lee (Taiwan) — Score: 9.1 / 10</span>
+            <span class="text-xs bg-blue-800 px-2.5 py-0.5 rounded">Uncut-GJ + Truncal Vagotomy</span>
+          </div>
+          <div class="p-5 space-y-4 text-sm">
+            <div>
+              <h3 class="text-xs font-bold uppercase tracking-wider text-emerald-700 mb-2">Pros (Strengths)</h3>
+              <ul class="list-disc list-inside text-slate-700 space-y-1.5 bg-emerald-50/50 p-3.5 rounded-lg border border-emerald-200">
+                <li><strong>Eliminates GJ Staple-Line Leak Risk:</strong> Preserving the healed 2017 gastrojejunostomy and only dividing the afferent loop 2 cm away avoids stapling inflamed/ulcerated pouch tissue right below a Grade IV hiatal hernia.</li>
+                <li><strong>Protects Lesser Curvature Blood Supply:</strong> Correctly explains why Highly Selective Vagotomy (HSV) is dangerous post-OAGB (would strip the left gastric artery arcade supplying the pouch) and uses safe Truncal Vagotomy instead.</li>
+                <li><strong>Dual Acid + Bile Shutdown:</strong> Permanently halts parietal acid via vagotomy while diverting bile via the Roux limb, and refuses to stop your PPI before surgery.</li>
+                <li><strong>Unmatched Personal Experience:</strong> Pioneer of OAGB since 2000; ~30 exact uncut-GJ revisions with 0% leak rate and $100/day hospital stay backup.</li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="text-xs font-bold uppercase tracking-wider text-rose-700 mb-2">Cons (Limitations &amp; Caveats)</h3>
+              <ul class="list-disc list-inside text-slate-700 space-y-1.5 bg-rose-50/50 p-3.5 rounded-lg border border-rose-200">
+                <li><strong>Ulcer Scar Left in Situ:</strong> Relies on external 360° sutures and natural healing rather than excising the fibrotic ulcer crater; provides no intraoperative tissue biopsy.</li>
+                <li><strong>Keeps 155 cm BP Limb (~205 cm Total Bypass):</strong> While stopping ulcer bleeding will fix acute anaemia drops, keeping a 155 cm BP limb + 40–60 cm Roux limb maintains duodenal iron malabsorption.</li>
+                <li><strong>No Post-Op PPI &amp; Tight 7-Day Travel Schedule:</strong> Stopping PPI immediately post-op is risky while the raw crater re-epithelializes (you should continue PPI for 6–8 weeks on your own and stay 10–12 days in Taiwan).</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dr. Usama Iqbal -->
+        <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+          <div class="bg-purple-900 text-white px-5 py-3 font-semibold text-sm flex justify-between items-center">
+            <span>2. Dr. Usama Iqbal (AKUH, Karachi) — Score: 8.5 / 10</span>
+            <span class="text-xs bg-purple-800 px-2.5 py-0.5 rounded">GJ Resection + RYGB + HH + GB</span>
+          </div>
+          <div class="p-5 space-y-4 text-sm">
+            <div>
+              <h3 class="text-xs font-bold uppercase tracking-wider text-emerald-700 mb-2">Pros (Strengths)</h3>
+              <ul class="list-disc list-inside text-slate-700 space-y-1.5 bg-emerald-50/50 p-3.5 rounded-lg border border-emerald-200">
+                <li><strong>Complete Excision of Ulcerated/Ischemic Tissue:</strong> Resecting the old GJ removes the chronic ulcer bed completely and allows full pathological examination of the resected ring.</li>
+                <li><strong>Decisive Single-Stage Plan:</strong> Commits upfront to simultaneous RYGB conversion, Hill Grade IV hiatal hernia repair (~25 cases/yr), and mandatory cholecystectomy.</li>
+                <li><strong>Transparent Hardware &amp; Regional Convenience:</strong> Confirms exclusive use of USA Medtronic Tri-Staple guns/reloads at JCI-accredited AKUH, orders comprehensive labs (including TSH &amp; Iron/TIBC), and costs ~$5,400–$7,350 USD close to Bangladesh.</li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="text-xs font-bold uppercase tracking-wider text-rose-700 mb-2">Cons (Limitations &amp; Caveats)</h3>
+              <ul class="list-disc list-inside text-slate-700 space-y-1.5 bg-rose-50/50 p-3.5 rounded-lg border border-rose-200">
+                <li><strong>Higher Technical Risk at New GJ Staple Line:</strong> Creating a brand-new gastrojejunostomy on a 9-year-old gastric pouch alongside crural dissection carries a higher baseline leak/stricture risk than Dr. Lee’s uncut-GJ approach.</li>
+                <li><strong>Lower Specific OAGB-to-RYGB Volume:</strong> His ~30 revisions include gastric bands, sleeves, OAGB, and RYGB combined.</li>
+                <li><strong>Deferred Limb-Length Details:</strong> Has not yet specified whether he will shorten the 155 cm BP limb or what Roux limb length he will use (must be clarified on the WhatsApp tele-consultation).</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dr. Fakhrul Islam -->
+        <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+          <div class="bg-emerald-900 text-white px-5 py-3 font-semibold text-sm flex justify-between items-center">
+            <span>3. Dr. Fakhrul Islam (Advisory) — Score: 7.7 / 10</span>
+            <span class="text-xs bg-emerald-800 px-2.5 py-0.5 rounded">Short-Limb RYGB (50-60 BP / 75 AL)</span>
+          </div>
+          <div class="p-5 space-y-4 text-sm">
+            <div>
+              <h3 class="text-xs font-bold uppercase tracking-wider text-emerald-700 mb-2">Pros (Strengths)</h3>
+              <ul class="list-disc list-inside text-slate-700 space-y-1.5 bg-emerald-50/50 p-3.5 rounded-lg border border-emerald-200">
+                <li><strong>Best Nutritional &amp; Limb-Length Geometry:</strong> Recognizes that a 155 cm BP limb is too long for a patient at BMI 27 with chronic iron deficiency; shortening the BP limb to 50–60 cm with a 75 cm Roux limb restores ~100 cm of absorptive bowel while guaranteeing zero bile reflux.</li>
+                <li><strong>Firm on Mandatory Cholecystectomy:</strong> Correctly insists the gallbladder must be removed in the same session.</li>
+                <li><strong>Supportive Patient Guidance:</strong> Cautions against information overload and anxiety.</li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="text-xs font-bold uppercase tracking-wider text-rose-700 mb-2">Cons (Limitations &amp; Caveats)</h3>
+              <ul class="list-disc list-inside text-slate-700 space-y-1.5 bg-rose-50/50 p-3.5 rounded-lg border border-rose-200">
+                <li><strong>Requires Dismantling the Entire 2017 Bypass:</strong> Shortening the BP limb from 155 cm to 50–60 cm and refashioning the GJ requires multiple new anastomoses and extensive adhesiolysis.</li>
+                <li><strong>Dismisses Vagotomy &amp; Hiatal Hernia Repair:</strong> Rejects vagotomy despite your bleed 9 days after stopping vonoprazan, and treats your Hill Grade IV hiatal hernia as optional unless pouch migration is seen.</li>
+                <li><strong>Impractical US Referral:</strong> Recommends surgery in the USA without naming a specific affordable pathway.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dr. Murat Üstün -->
+        <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+          <div class="bg-amber-900 text-white px-5 py-3 font-semibold text-sm flex justify-between items-center">
+            <span>4. Dr. Murat Üstün (IBC, Istanbul) — Score: 7.8 / 10</span>
+            <span class="text-xs bg-amber-800 px-2.5 py-0.5 rounded">RYGB / Reversal + Conditional Add-Ons</span>
+          </div>
+          <div class="p-5 space-y-4 text-sm">
+            <div>
+              <h3 class="text-xs font-bold uppercase tracking-wider text-emerald-700 mb-2">Pros (Strengths)</h3>
+              <ul class="list-disc list-inside text-slate-700 space-y-1.5 bg-emerald-50/50 p-3.5 rounded-lg border border-emerald-200">
+                <li><strong>Best Pre-Operative Medical &amp; Medication Audit:</strong> Spotted the discrepancy between your September discharge prescription and your letter, questioned the Dexlansoprazole 30 mg TDS schedule, and planned anaesthetic precautions for methylphenidate/hypersomnia.</li>
+                <li><strong>Safe 10-Day Recovery Timeline:</strong> Provides 3–4 nights at JCI-accredited Liv Hospital Vadistanbul plus hotel monitoring until Day 10 fit-to-fly clearance.</li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="text-xs font-bold uppercase tracking-wider text-rose-700 mb-2">Cons (Limitations &amp; Caveats)</h3>
+              <ul class="list-disc list-inside text-slate-700 space-y-1.5 bg-rose-50/50 p-3.5 rounded-lg border border-rose-200">
+                <li><strong>Gallbladder &amp; Hiatal Hernia Treated as Paid Extras (+£2,000):</strong> Questioning whether 5–6 mm gallstones need removal during a RYGB conversion ignores the high risk of post-RYGB common bile duct stones where ERCP cannot reach.</li>
+                <li><strong>Omitted Case Volume Answer:</strong> Sent two package pricing emails (£5,350 base / £7,350 total) without answering your October 15 question on how many OAGB-to-RYGB conversions Dr. Üstün has personally performed.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    const criteria = [
+      {
+        id: 'validity',
+        title: '1. Pathophysiological & Ulcer-Cure Validity',
+        desc: 'Control of both parietal acid & bile reflux, plus reliability of ulcer healing.'
+      },
+      {
+        id: 'safety',
+        title: '2. Anastomotic Safety & Leak Avoidance',
+        desc: 'Minimization of GJ staple-line leak, pouch ischemia, and pre-op re-bleeding.'
+      },
+      {
+        id: 'nutrition',
+        title: '3. Nutritional & Complete Anatomical Resolution',
+        desc: 'Preservation of iron/BMI 27 + mandatory Cholecystectomy & Grade IV Hiatal Hernia repair.'
+      },
+      {
+        id: 'experience',
+        title: '4. Surgeon’s Specific OAGB Revisional Mastery',
+        desc: 'Verified personal case volume in OAGB-to-RYGB revisions and technical transparency.'
+      },
+      {
+        id: 'logistics',
+        title: '5. Logistics, Peri-Operative Care & Cost Value',
+        desc: 'Travel feasibility from Bangladesh, inpatient safety backup, and total cost.'
+      }
+    ];
+
+    const defaultScores = {
+      lee: [9.0, 9.5, 8.5, 9.8, 8.7],
+      usama: [8.8, 8.2, 8.8, 8.0, 8.7],
+      murat: [7.8, 8.5, 7.2, 7.5, 8.0],
+      fakhrul: [7.8, 7.5, 9.0, 7.5, 6.7]
+    };
+
+    const state = JSON.parse(JSON.stringify(defaultScores));
+
+    function renderRubric() {
+      const tbody = document.getElementById('rubric-body');
+      tbody.innerHTML = '';
+
+      criteria.forEach((c, idx) => {
+        const tr = document.createElement('tr');
+        tr.className = 'hover:bg-slate-50/80 transition';
+        tr.innerHTML = `
+          <td class="p-4 align-top">
+            <div class="font-semibold text-slate-900">${c.title}</div>
+            <div class="text-xs text-slate-500 mt-1">${c.desc}</div>
+          </td>
+          <td class="p-4 align-middle">
+            <div class="flex items-center gap-2">
+              <input type="range" min="0" max="10" step="0.1" value="${state.lee[idx]}"
+                oninput="updateScore('lee', ${idx}, this.value)"
+                class="w-full accent-blue-700 cursor-pointer">
+              <span id="val-lee-${idx}" class="w-9 text-right font-bold text-blue-700">${state.lee[idx].toFixed(1)}</span>
+            </div>
+          </td>
+          <td class="p-4 align-middle">
+            <div class="flex items-center gap-2">
+              <input type="range" min="0" max="10" step="0.1" value="${state.usama[idx]}"
+                oninput="updateScore('usama', ${idx}, this.value)"
+                class="w-full accent-purple-700 cursor-pointer">
+              <span id="val-usama-${idx}" class="w-9 text-right font-bold text-purple-700">${state.usama[idx].toFixed(1)}</span>
+            </div>
+          </td>
+          <td class="p-4 align-middle">
+            <div class="flex items-center gap-2">
+              <input type="range" min="0" max="10" step="0.1" value="${state.murat[idx]}"
+                oninput="updateScore('murat', ${idx}, this.value)"
+                class="w-full accent-amber-700 cursor-pointer">
+              <span id="val-murat-${idx}" class="w-9 text-right font-bold text-amber-700">${state.murat[idx].toFixed(1)}</span>
+            </div>
+          </td>
+          <td class="p-4 align-middle">
+            <div class="flex items-center gap-2">
+              <input type="range" min="0" max="10" step="0.1" value="${state.fakhrul[idx]}"
+                oninput="updateScore('fakhrul', ${idx}, this.value)"
+                class="w-full accent-emerald-700 cursor-pointer">
+              <span id="val-fakhrul-${idx}" class="w-9 text-right font-bold text-emerald-700">${state.fakhrul[idx].toFixed(1)}</span>
+            </div>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+      calculateTotals();
+    }
+
+    function updateScore(doc, idx, val) {
+      const num = parseFloat(val);
+      state[doc][idx] = num;
+      document.getElementById(`val-${doc}-${idx}`).textContent = num.toFixed(1);
+      calculateTotals();
+    }
+
+    function calculateTotals() {
+      const avg = arr => arr.reduce((a, b) => a + b, 0) / arr.length;
+      const scores = [
+        { key: 'lee', val: avg(state.lee) },
+        { key: 'usama', val: avg(state.usama) },
+        { key: 'murat', val: avg(state.murat) },
+        { key: 'fakhrul', val: avg(state.fakhrul) }
+      ];
+
+      scores.forEach(s => {
+        document.getElementById(`total-${s.key}`).textContent = s.val.toFixed(1);
+      });
+
+      const sorted = [...scores].sort((a, b) => b.val - a.val);
+      scores.forEach(item => {
+        const rankIdx = sorted.findIndex(s => s.key === item.key) + 1;
+        document.getElementById(`rank-${item.key}`).textContent = `Ranked #${rankIdx} (${item.val.toFixed(1)}/10)`;
+      });
+    }
+
+    function resetToDefaults() {
+      Object.keys(defaultScores).forEach(k => {
+        state[k] = [...defaultScores[k]];
+      });
+      renderRubric();
+    }
+
+    renderRubric();
+  </script>
+</body>
+</html>
